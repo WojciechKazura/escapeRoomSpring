@@ -19,17 +19,14 @@ public class ItemController {
 
     @GetMapping
     List<Item> getItem() {
+       return itemService.getItems();
 
-
-        return null;
     }
 
     @PostMapping
     void addItem(@RequestBody Item item) {
         itemService.save(item);
     }
-
-
 
 
 }
