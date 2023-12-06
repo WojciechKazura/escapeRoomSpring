@@ -19,17 +19,9 @@ public class ItemController {
 
     @GetMapping
     List<Item> getItem() {
-        Item door = new Item("door");
-        Item window = new Item("window");
-        Item key = new Item("key");
 
-        List<Item> itemList = new ArrayList<>();
 
-        itemList.add(door);
-        itemList.add(window);
-        itemList.add(key);
-
-        return itemList;
+        return null;
     }
 
     @PostMapping
