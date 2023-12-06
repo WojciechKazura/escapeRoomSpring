@@ -8,6 +8,7 @@ public class EscapeRoomApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(EscapeRoomApplication.class, args);
+
 	}
 
 }
