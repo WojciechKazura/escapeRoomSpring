@@ -1,18 +1,23 @@
 package com.escapeRoom.controller;
 
 import com.escapeRoom.entitty.Item;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import com.escapeRoom.service.ItemService;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@RequestMapping("api/v1/items")
 public class ItemController {
 
-    @GetMapping("api/v1/items")
+    private ItemService itemService;
+
+    public ItemController(ItemService itemService) {
+        this.itemService = itemService;
+    }
+
+    @GetMapping
     List<Item> getItem() {
         Item door = new Item("door");
         Item window = new Item("window");
@@ -27,10 +32,12 @@ public class ItemController {
         return itemList;
     }
 
-    @PostMapping("api/v1/items")
+    @PostMapping
     void addItem(@RequestBody Item item) {
-        System.out.println(item);
+        itemService.save(item);
     }
+
+
 
 
 }
