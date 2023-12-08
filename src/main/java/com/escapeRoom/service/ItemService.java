@@ -3,7 +3,6 @@ package com.escapeRoom.service;
 import com.escapeRoom.entitty.Item;
 import com.escapeRoom.repository.ItemRepository;
 import jakarta.annotation.PostConstruct;
-import jakarta.persistence.Entity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
