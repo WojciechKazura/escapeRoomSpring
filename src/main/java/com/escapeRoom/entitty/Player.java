@@ -14,6 +14,7 @@ public class Player {
     private int id;
     private String name;
     private int result;
+    private boolean active;
 
     public Player(String name, int result) {
         this.name = name;
@@ -30,5 +31,13 @@ public class Player {
 
     public int getResult() {
         return result;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public boolean isActive() {
+        return active;
     }
 }
