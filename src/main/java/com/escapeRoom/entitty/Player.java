@@ -5,6 +5,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
+import java.util.List;
+
 @Entity
 @Table(name = "players")
 public class Player {
@@ -15,6 +17,7 @@ public class Player {
     private String name;
     private int result;
     private boolean active;
+    private List<Item> itemList;
 
     public Player(String name, int result) {
         this.name = name;
@@ -39,5 +42,9 @@ public class Player {
 
     public boolean isActive() {
         return active;
+    }
+
+    public List<Item> getItemList() {
+        return itemList;
     }
 }

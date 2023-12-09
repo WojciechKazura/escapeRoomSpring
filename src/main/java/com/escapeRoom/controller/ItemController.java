@@ -18,18 +18,12 @@ public class ItemController {
 
     @GetMapping
     List<Item> getAllItems() {
-        return itemService.getItems();
+        return itemService.getAllItems();
     }
 
     @GetMapping
     Item getItem(Item item) {
-        List<Item> itemList = getAllItems();
-        for (Item item1 : itemList){
-            if(item.equals(item1)){
-               return item1;
-            }
-        }
-       return null;
+        return itemService.getItem(item);
     }
 
     @PostMapping
