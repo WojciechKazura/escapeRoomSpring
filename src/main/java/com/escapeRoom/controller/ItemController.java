@@ -21,9 +21,9 @@ public class ItemController {
         return itemService.getAllItems();
     }
 
-    @GetMapping
-    Item getItem(Item item) {
-        return itemService.getItem(item);
+    @GetMapping("/{id}")//todo zabezpieczyc przed wyjątkiem gdy mamy złe id
+    Item getItem(@PathVariable Integer id) {
+        return itemService.getItem(id);
     }
 
     @PostMapping

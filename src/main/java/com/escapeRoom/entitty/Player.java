@@ -1,9 +1,6 @@
 package com.escapeRoom.entitty;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.util.List;
 
@@ -17,6 +14,7 @@ public class Player {
     private String name;
     private int result;
     private boolean active;
+    @OneToMany
     private List<Item> itemList;
 
     public Player(String name, int result) {

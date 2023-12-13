@@ -36,18 +36,18 @@ public class ItemService {
         itemRepository.save(item);
     }
 
-    public List<Item> getAllItems(){
+    public List<Item> getAllItems() {
         return itemRepository.findAll();
     }
 
-    public Item getItem(Item item){
-        List<Item> itemList = getAllItems();
-        for (Item item1 : itemList){
-            if(item.equals(item1)){
-                return item1;
-            }
-        }
-        return null;
+    public Item getItem(Integer id) {
+        return itemRepository.findById(id).orElseThrow();
+
     }
 
+
 }
+
+
+
+
