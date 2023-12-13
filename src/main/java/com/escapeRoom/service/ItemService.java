@@ -1,5 +1,6 @@
 package com.escapeRoom.service;
 
+import com.escapeRoom.dto.ItemDto;
 import com.escapeRoom.entitty.Item;
 import com.escapeRoom.repository.ItemRepository;
 import jakarta.annotation.PostConstruct;
@@ -28,23 +29,34 @@ public class ItemService {
         return new ArrayList<>(List.of(new Item("door"), new Item("window"), new Item("key")));
     }
 
-    void saveElementaryItems(List<Item> itemList) {
+    private void saveElementaryItems(List<Item> itemList) {
         itemRepository.saveAll(itemList);
     }
 
-    public void save(Item item) {
-        itemRepository.save(item);
+    public void save(ItemDto item) {
+        itemRepository.save(mapToItem(item));
     }
 
-    public List<Item> getAllItems() {
-        return itemRepository.findAll();
+    public List<ItemDto> getAllItems() {
+        List<ItemDto> itemDtoList = new ArrayList<>();
+        List<Item> itemList = itemRepository.findAll();
+        for (Item item : itemList) {
+            itemDtoList.add(mapToItemDto(item));
+        }
+        return itemDtoList;
     }
 
-    public Item getItem(Integer id) {
-        return itemRepository.findById(id).orElseThrow();
-
+    public ItemDto getItem(Integer id) {
+        return mapToItemDto(itemRepository.findById(id).orElseThrow());
     }
 
+    private Item mapToItem(ItemDto itemDto) {
+        return new Item(itemDto.getName());
+    }
+
+    private ItemDto mapToItemDto(Item item) {
+        return new ItemDto(item.getId(), item.getName());
+    }
 
 }
 

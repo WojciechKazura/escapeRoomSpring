@@ -1,5 +1,6 @@
 package com.escapeRoom.controller;
 
+import com.escapeRoom.dto.ItemDto;
 import com.escapeRoom.entitty.Item;
 import com.escapeRoom.service.ItemService;
 import org.springframework.web.bind.annotation.*;
@@ -17,17 +18,17 @@ public class ItemController {
     }
 
     @GetMapping
-    List<Item> getAllItems() {
+    List<ItemDto> getAllItems() {
         return itemService.getAllItems();
     }
 
     @GetMapping("/{id}")//todo zabezpieczyc przed wyjątkiem gdy mamy złe id
-    Item getItem(@PathVariable Integer id) {
+    ItemDto getItem(@PathVariable Integer id) {
         return itemService.getItem(id);
     }
 
     @PostMapping
-    void addItem(@RequestBody Item item) {
+    void addItem(@RequestBody ItemDto item) {
         itemService.save(item);
     }
 
