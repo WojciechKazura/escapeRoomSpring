@@ -14,9 +14,7 @@ public class ActionService {
     }
 
     public String doAction(ActionDto actionDto) {
-        Item item = itemService.findItem(actionDto.getItemId());
-        System.out.println(item.use());
-        return  item.use();
+        return  itemService.useItem(actionDto.getItemId());
     }
 
 

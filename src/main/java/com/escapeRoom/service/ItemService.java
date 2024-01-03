@@ -5,6 +5,7 @@ import com.escapeRoom.entity.Item;
 import com.escapeRoom.entity.Window;
 import com.escapeRoom.repository.ItemRepository;
 import jakarta.annotation.PostConstruct;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -47,14 +48,21 @@ public class ItemService {
         return itemDtoList;
     }
 
+    @Transactional
+    public String useItem(Integer id) {
+        Item item = findItem(id);
+        String result = item.use();
+        return result;
+    }
+
     public ItemDto getItem(Integer id) {
         return mapToItemDto(itemRepository.findById(id).orElseThrow());
     }
 
     private Item mapToItem(ItemDto itemDto) {
-       return switch (itemDto.getItemType()) {
+        return switch (itemDto.getItemType()) {
             case WINDOW -> new Window();
-           default -> throw new IllegalStateException("Nieprawidłowy typ");
+            default -> throw new IllegalStateException("Nieprawidłowy typ");
         };
 
     }
@@ -63,9 +71,9 @@ public class ItemService {
         return new ItemDto(item.getId(), item.getName(), item.getType());
     }
 
-    public Item findItem(int itemEntityId) {
+    private Item findItem(int itemEntityId) {
         //todo
-       return itemRepository.findById(itemEntityId).orElseThrow();
+        return itemRepository.findById(itemEntityId).orElseThrow();
 
 
     }

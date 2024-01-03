@@ -9,11 +9,17 @@ public class Window extends Item{
 
     public Window() {
         super("Window", ItemType.WINDOW);
-
     }
 
     @Override
     public String use() {
-        return "Otwarte";
+        if(open){
+            open=false;
+            return "Okno zanknięte";
+        }else{
+
+            open=true;
+            return "Okno otwarte";
+        }
     }
 }
