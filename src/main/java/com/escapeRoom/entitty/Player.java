@@ -15,7 +15,7 @@ public class Player {
     private int result;
     private boolean active;
     @OneToMany
-    private List<Item> itemList;
+    private List<ItemEntity> itemEntityList;
 
     public Player(String name, int result) {
         this.name = name;
@@ -42,7 +42,7 @@ public class Player {
         return active;
     }
 
-    public List<Item> getItemList() {
-        return itemList;
+    public List<ItemEntity> getItemList() {
+        return itemEntityList;
     }
 }

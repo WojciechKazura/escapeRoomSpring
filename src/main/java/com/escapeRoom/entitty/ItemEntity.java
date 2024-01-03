@@ -6,19 +6,21 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity()
-@Table(name="items")
-public class Item {
+@Table(name = "items")
+public class ItemEntity {
 
     @Id
     @GeneratedValue
     private int id;
     private String name;
+    private ItemType type; //todo
 
-    public Item(String name) {
+    public ItemEntity(String name) {
         this.name = name;
+        type=ItemType.WINDOW;
     }
 
-    public Item(){
+    public ItemEntity() {
 
     }
 
@@ -30,9 +32,13 @@ public class Item {
         return id;
     }
 
+    public ItemType getType() {
+        return type;
+    }
+
     @Override
     public String toString() {
-        return "Item{" +
+        return "ItemEntity{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 '}';

@@ -1,7 +1,6 @@
 package com.escapeRoom.controller;
 
 import com.escapeRoom.dto.ItemDto;
-import com.escapeRoom.entitty.Item;
 import com.escapeRoom.service.ItemService;
 import org.springframework.web.bind.annotation.*;
 
