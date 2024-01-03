@@ -1,10 +1,8 @@
 package com.escapeRoom.service;
 
 import com.escapeRoom.dto.ItemDto;
-import com.escapeRoom.entitty.ItemEntity;
-import com.escapeRoom.entitty.ItemType;
-import com.escapeRoom.model.Item;
-import com.escapeRoom.model.Window;
+import com.escapeRoom.entity.Item;
+import com.escapeRoom.entity.Window;
 import com.escapeRoom.repository.ItemRepository;
 import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Service;
@@ -28,12 +26,12 @@ public class ItemService {
         }
     }
 
-    private List<ItemEntity> prepareElementaryItems() {
-        return new ArrayList<>(List.of(new ItemEntity("door"), new ItemEntity("window"), new ItemEntity("key")));
+    private List<Item> prepareElementaryItems() {
+        return new ArrayList<>(List.of(new Window()));
     }
 
-    private void saveElementaryItems(List<ItemEntity> itemEntityList) {
-        itemRepository.saveAll(itemEntityList);
+    private void saveElementaryItems(List<Item> itemList) {
+        itemRepository.saveAll(itemList);
     }
 
     public void save(ItemDto item) {
@@ -42,9 +40,9 @@ public class ItemService {
 
     public List<ItemDto> getAllItems() {
         List<ItemDto> itemDtoList = new ArrayList<>();
-        List<ItemEntity> itemEntityList = itemRepository.findAll();
-        for (ItemEntity itemEntity : itemEntityList) {
-            itemDtoList.add(mapToItemDto(itemEntity));
+        List<Item> itemList = itemRepository.findAll();
+        for (Item item : itemList) {
+            itemDtoList.add(mapToItemDto(item));
         }
         return itemDtoList;
     }
@@ -53,22 +51,23 @@ public class ItemService {
         return mapToItemDto(itemRepository.findById(id).orElseThrow());
     }
 
-    private ItemEntity mapToItem(ItemDto itemDto) {
-        return new ItemEntity(itemDto.getName());
+    private Item mapToItem(ItemDto itemDto) {
+       return switch (itemDto.getItemType()) {
+            case WINDOW -> new Window();
+           default -> throw new IllegalStateException("Nieprawidłowy typ");
+        };
+
     }
 
-    private ItemDto mapToItemDto(ItemEntity itemEntity) {
-        return new ItemDto(itemEntity.getId(), itemEntity.getName());
+    private ItemDto mapToItemDto(Item item) {
+        return new ItemDto(item.getId(), item.getName(), item.getType());
     }
 
     public Item findItem(int itemEntityId) {
         //todo
-        ItemEntity itemEntity = itemRepository.findById(itemEntityId).orElseThrow();
-        if (itemEntity.getType() == ItemType.WINDOW) {
-            Item window = new Window(itemEntity);
-            return window;
-        }
-        return null;
+       return itemRepository.findById(itemEntityId).orElseThrow();
+
+
     }
 
 }

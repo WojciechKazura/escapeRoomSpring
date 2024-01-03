@@ -1,50 +1,49 @@
-package com.escapeRoom.entitty;
+package com.escapeRoom.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
-import java.awt.*;
-
 @Entity()
-@Table(name="Room")
-public class Room {
+@Table(name = "items")
+public abstract class Item {
 
     @Id
     @GeneratedValue
     private int id;
-
     private String name;
-    private String image;
+    private ItemType type; //todo
+  
 
-    public Room(String name, String image) {
+    public Item(String name, ItemType itemType) {
         this.name = name;
-        this.image = image;
+        this.type=itemType;
     }
 
-    Room(){
+    public Item() {
 
+    }
+
+    public abstract String use();
+
+    public String getName() {
+        return name;
     }
 
     public int getId() {
         return id;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public String getImage() {
-        return image;
+    public ItemType getType() {
+        return type;
     }
 
     @Override
     public String toString() {
-        return "Room{" +
+        return "Item{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", image=" + image +
                 '}';
     }
 }

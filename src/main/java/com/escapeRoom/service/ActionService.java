@@ -1,7 +1,7 @@
 package com.escapeRoom.service;
 
 import com.escapeRoom.dto.ActionDto;
-import com.escapeRoom.model.Item;
+import com.escapeRoom.entity.Item;
 import org.springframework.stereotype.Service;
 
 @Service

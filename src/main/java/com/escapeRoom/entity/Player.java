@@ -1,4 +1,4 @@
-package com.escapeRoom.entitty;
+package com.escapeRoom.entity;
 
 import jakarta.persistence.*;
 
@@ -15,7 +15,7 @@ public class Player {
     private int result;
     private boolean active;
     @OneToMany
-    private List<ItemEntity> itemEntityList;
+    private List<Item> itemList;
 
     public Player(String name, int result) {
         this.name = name;
@@ -42,7 +42,7 @@ public class Player {
         return active;
     }
 
-    public List<ItemEntity> getItemList() {
-        return itemEntityList;
+    public List<Item> getItemList() {
+        return itemList;
     }
 }

@@ -1,4 +1,4 @@
-package com.escapeRoom.entitty;
+package com.escapeRoom.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -6,41 +6,43 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity()
-@Table(name = "items")
-public class ItemEntity {
+@Table(name="Room")
+public class Room {
 
     @Id
     @GeneratedValue
     private int id;
+
     private String name;
-    private ItemType type; //todo
+    private String image;
 
-    public ItemEntity(String name) {
+    public Room(String name, String image) {
         this.name = name;
-        type=ItemType.WINDOW;
+        this.image = image;
     }
 
-    public ItemEntity() {
+    Room(){
 
-    }
-
-    public String getName() {
-        return name;
     }
 
     public int getId() {
         return id;
     }
 
-    public ItemType getType() {
-        return type;
+    public String getName() {
+        return name;
+    }
+
+    public String getImage() {
+        return image;
     }
 
     @Override
     public String toString() {
-        return "ItemEntity{" +
+        return "Room{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", image=" + image +
                 '}';
     }
 }

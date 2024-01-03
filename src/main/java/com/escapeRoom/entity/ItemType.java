@@ -1,4 +1,4 @@
-package com.escapeRoom.entitty;
+package com.escapeRoom.entity;
 
 public  enum  ItemType {
 
