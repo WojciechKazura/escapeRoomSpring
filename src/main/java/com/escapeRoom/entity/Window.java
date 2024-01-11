@@ -1,5 +1,4 @@
 package com.escapeRoom.entity;
-
 import jakarta.persistence.Entity;
 
 @Entity

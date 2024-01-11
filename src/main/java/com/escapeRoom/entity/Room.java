@@ -1,9 +1,8 @@
 package com.escapeRoom.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity()
 @Table(name="Room")
@@ -12,13 +11,15 @@ public class Room {
     @Id
     @GeneratedValue
     private int id;
-
     private String name;
     private String image;
+    @OneToMany
+    private List<Item> itemList;
 
-    public Room(String name, String image) {
+    public Room(String name, String image, List<Item> itemList) {
         this.name = name;
         this.image = image;
+        this.itemList = itemList;
     }
 
     Room(){
@@ -35,6 +36,10 @@ public class Room {
 
     public String getImage() {
         return image;
+    }
+
+    public List<Item> getItemList() {
+        return itemList;
     }
 
     @Override
