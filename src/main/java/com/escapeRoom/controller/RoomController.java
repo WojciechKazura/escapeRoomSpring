@@ -1,6 +1,6 @@
 package com.escapeRoom.controller;
 
-import com.escapeRoom.service.RoomService;
+import com.escapeRoom.service.GameService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class RoomController {
 
 
-    private RoomService roomService;
+    private GameService gameService;
 
-    public RoomController(RoomService roomService) {
-        this.roomService = roomService;
+    public RoomController(GameService gameService) {
+        this.gameService = gameService;
     }
 }

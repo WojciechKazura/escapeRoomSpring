@@ -2,6 +2,7 @@ package com.escapeRoom.entity;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -17,9 +18,13 @@ public class Player {
     @OneToMany
     private List<Item> itemList;
 
-    public Player(String name, int result) {
+    @OneToOne
+    private Room room;
+
+    public Player(String name, int result,Room room) {
         this.name = name;
         this.result = result;
+        this.room=room;
     }
 
     Player() {

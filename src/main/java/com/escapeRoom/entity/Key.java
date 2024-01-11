@@ -5,7 +5,7 @@ import jakarta.persistence.Entity;
 @Entity
 public class Key extends Item {
 
-    private boolean keyPass = false;
+    private boolean keyPass = true;
 
     public Key() {
         super("Key", ItemType.KEY);
@@ -14,12 +14,11 @@ public class Key extends Item {
     @Override
     public String use() {
         if (keyPass) {
-            keyPass = false;
             return "Pasuje";
-        } else {
-            keyPass = true;
-            return "Nie pasuje";
+        } else{
+            System.out.println("nie pasuje");
         }
+        return null;
     }
 }
 

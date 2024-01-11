@@ -1,9 +1,11 @@
 package com.escapeRoom.service;
 
+import com.escapeRoom.dto.ActionDto;
 import com.escapeRoom.dto.ItemDto;
-import com.escapeRoom.entity.Item;
-import com.escapeRoom.entity.Window;
+import com.escapeRoom.entity.*;
 import com.escapeRoom.repository.ItemRepository;
+import com.escapeRoom.repository.PlayerRepository;
+import com.escapeRoom.repository.RoomRepository;
 import jakarta.annotation.PostConstruct;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
@@ -12,12 +14,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class ItemService {
+@Transactional
+public class GameService {
 
     private ItemRepository itemRepository;
+    private PlayerRepository playerRepository;
+    private RoomRepository roomRepository;
+    private Room room;
+    private Player player;
 
-    public ItemService(ItemRepository itemRepository) {
+    GameService(ItemRepository itemRepository, PlayerRepository playerRepository, RoomRepository roomRepository) {
         this.itemRepository = itemRepository;
+        this.playerRepository = playerRepository;
+        this.roomRepository = roomRepository;
+        List<Item> itemList = new ArrayList<>();
+        itemList.add(new Window());
+        itemList.add(new Key());
+        itemList.add(new Door());
+        this.room = new Room("pierwszy", "obraz1", itemList);
+        new Player("gracz1", 0, room);
+    }
+
+    public String doAction(ActionDto actionDto) {
+        return useItem(actionDto.getItemId());
     }
 
     @PostConstruct
@@ -48,10 +67,11 @@ public class ItemService {
         return itemDtoList;
     }
 
-    @Transactional
+   // @Transactional
     public String useItem(Integer id) {
         Item item = findItem(id);
         String result = item.use();
+       // itemRepository.save(item);
         return result;
     }
 
@@ -78,8 +98,5 @@ public class ItemService {
 
     }
 
+
 }
-
-
-
-

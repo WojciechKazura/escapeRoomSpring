@@ -16,7 +16,6 @@ public class Window extends Item{
             open=false;
             return "Okno zanknięte";
         }else{
-
             open=true;
             return "Okno otwarte";
         }

@@ -1,7 +1,7 @@
 package com.escapeRoom.controller;
 
 import com.escapeRoom.dto.ItemDto;
-import com.escapeRoom.service.ItemService;
+import com.escapeRoom.service.GameService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,25 +10,26 @@ import java.util.List;
 @RequestMapping("api/v1/items")
 public class ItemController {
 
-    private ItemService itemService;
+    private GameService gameService;
 
-    public ItemController(ItemService itemService) {
-        this.itemService = itemService;
+    public ItemController(GameService gameService) {
+        this.gameService = gameService;
     }
 
     @GetMapping
     List<ItemDto> getAllItems() {
-        return itemService.getAllItems();
+        return gameService.getAllItems();
     }
 
-    @GetMapping("/{id}")//todo zabezpieczyc przed wyjątkiem gdy mamy złe id
+    @GetMapping("/{id}")
+//todo zabezpieczyc przed wyjątkiem gdy mamy złe id
     ItemDto getItem(@PathVariable Integer id) {
-        return itemService.getItem(id);
+        return gameService.getItem(id);
     }
 
     @PostMapping
     void addItem(@RequestBody ItemDto item) {
-        itemService.save(item);
+        gameService.save(item);
     }
 
 
