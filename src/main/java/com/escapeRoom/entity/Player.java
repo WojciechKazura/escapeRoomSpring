@@ -1,6 +1,7 @@
 package com.escapeRoom.entity;
 
 import jakarta.persistence.*;
+import org.hibernate.engine.internal.Cascade;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,10 +16,10 @@ public class Player {
     private String name;
     private int result;
     private boolean active;
-    @OneToMany
+    @OneToMany(cascade=CascadeType.ALL)
     private List<Item> itemList;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Room room;
 
     public Player(String name, int result,Room room) {

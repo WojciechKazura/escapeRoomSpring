@@ -13,7 +13,7 @@ public class Room {
     private int id;
     private String name;
     private String image;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Item> itemList;
 
     public Room(String name, String image, List<Item> itemList) {

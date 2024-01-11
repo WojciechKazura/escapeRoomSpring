@@ -20,19 +20,11 @@ public class GameService {
     private ItemRepository itemRepository;
     private PlayerRepository playerRepository;
     private RoomRepository roomRepository;
-    private Room room;
-    private Player player;
 
     GameService(ItemRepository itemRepository, PlayerRepository playerRepository, RoomRepository roomRepository) {
         this.itemRepository = itemRepository;
         this.playerRepository = playerRepository;
         this.roomRepository = roomRepository;
-        List<Item> itemList = new ArrayList<>();
-        itemList.add(new Window());
-        itemList.add(new Key());
-        itemList.add(new Door());
-        this.room = new Room("pierwszy", "obraz1", itemList);
-        new Player("gracz1", 0, room);
     }
 
     public String doAction(ActionDto actionDto) {
@@ -42,16 +34,13 @@ public class GameService {
     @PostConstruct
     private void prepareDatabase() {
         if (itemRepository.count() == 0) {
-            saveElementaryItems(prepareElementaryItems());
+            List<Item> itemList = new ArrayList<>();
+            itemList.add(new Window());
+            itemList.add(new Key());
+            itemList.add(new Door());
+            Player player = new Player("gracz1", 0, new Room("pierwszy", "obraz1", itemList));
+            playerRepository.save(player);
         }
-    }
-
-    private List<Item> prepareElementaryItems() {
-        return new ArrayList<>(List.of(new Window()));
-    }
-
-    private void saveElementaryItems(List<Item> itemList) {
-        itemRepository.saveAll(itemList);
     }
 
     public void save(ItemDto item) {
@@ -67,11 +56,11 @@ public class GameService {
         return itemDtoList;
     }
 
-   // @Transactional
+    // @Transactional
     public String useItem(Integer id) {
         Item item = findItem(id);
         String result = item.use();
-       // itemRepository.save(item);
+        // itemRepository.save(item);
         return result;
     }
 
