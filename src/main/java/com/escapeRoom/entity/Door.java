@@ -16,17 +16,22 @@ public class Door extends Item {
 
     public Door(Key key) {
         super("Door", ItemType.DOOR);
-        this.key=key;
+        this.key = key;
     }
 
     @Override
     public String use(Context context) {
-        if (open) {
+
+        if (!open && context.getPlayer().getItemList().contains(key)) {
+            open = true;
+            return "Otworzyłeś dzwi kluczem";
+        } else if (open) {
             open = false;
             return "Drzwi zanknięte";
-        } else {
-            open = true;
-            return "Drzwi otwarte";
+        }else{
+            return "Dzwi zamknięte brak klucza.";
         }
+
+
     }
 }
