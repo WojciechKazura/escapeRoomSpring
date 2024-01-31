@@ -88,5 +88,12 @@ public class GameService {
 
     }
 
-
+    public List<ItemDto> getRoomItems(int id) {
+        List<ItemDto> itemDtoList = new ArrayList<>();
+        List<Item> itemList = roomRepository.findById(id).orElseThrow().getItemList();
+        for (Item item : itemList) {
+            itemDtoList.add(mapToItemDto(item));
+        }
+        return itemDtoList;
+    }
 }
