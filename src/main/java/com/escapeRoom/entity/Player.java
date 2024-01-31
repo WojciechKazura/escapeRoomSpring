@@ -32,6 +32,10 @@ public class Player {
 
     }
 
+    public Room getRoom() {
+        return room;
+    }
+
     public String getName() {
         return name;
     }

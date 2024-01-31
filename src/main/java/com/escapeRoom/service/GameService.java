@@ -27,17 +27,15 @@ public class GameService {
         this.roomRepository = roomRepository;
     }
 
-    public String doAction(ActionDto actionDto) {
-        return useItem(actionDto.getItemId());
-    }
 
     @PostConstruct
     private void prepareDatabase() {
         if (itemRepository.count() == 0) {
             List<Item> itemList = new ArrayList<>();
             itemList.add(new Window());
-            itemList.add(new Key());
-            itemList.add(new Door());
+            Key key = new Key();
+            itemList.add(key);
+            itemList.add(new Door(key));
             Player player = new Player("gracz1", 0, new Room("pierwszy", "obraz1", itemList));
             playerRepository.save(player);
         }
@@ -57,9 +55,11 @@ public class GameService {
     }
 
     // @Transactional
-    public String useItem(Integer id) {
-        Item item = findItem(id);
-        String result = item.use();
+    public String doAction(ActionDto actionDto) {
+        Player player = playerRepository.findById(actionDto.getPlayerId()).orElseThrow();
+        Context context = new Context(player.getRoom(), player);
+        Item item = findItem(actionDto.getItemId());
+        String result = item.use(context);
         // itemRepository.save(item);
         return result;
     }

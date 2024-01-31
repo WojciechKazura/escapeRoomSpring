@@ -25,7 +25,7 @@ public abstract class Item {
 
     }
 
-    public abstract String use();
+    public abstract String use(Context context);
 
     public String getName() {
         return name;

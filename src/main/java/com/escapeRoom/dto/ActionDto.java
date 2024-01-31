@@ -4,6 +4,8 @@ public class ActionDto {
 
     //id itemu
     private int itemId;
+    private int playerId;
+
 
     public ActionDto() {
 
@@ -13,10 +15,7 @@ public class ActionDto {
         return itemId;
     }
 
-
-
-
-
-
-
+    public int getPlayerId() {
+        return playerId;
+    }
 }

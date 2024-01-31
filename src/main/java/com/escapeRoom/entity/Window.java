@@ -11,7 +11,7 @@ public class Window extends Item{
     }
 
     @Override
-    public String use() {
+    public String use(Context context) {
         if(open){
             open=false;
             return "Okno zanknięte";
