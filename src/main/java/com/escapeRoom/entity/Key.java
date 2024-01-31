@@ -12,7 +12,9 @@ public class Key extends Item {
 
     @Override
     public String use(Context context) {
-        return "";
+        context.getPlayer().getItemList().add(this);
+        context.getRoom().getItemList().remove(this);
+        return "Klucz zabrany z pokoju";
     }
 }
 

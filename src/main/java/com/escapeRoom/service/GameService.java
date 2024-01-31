@@ -59,9 +59,10 @@ public class GameService {
         Player player = playerRepository.findById(actionDto.getPlayerId()).orElseThrow();
         Context context = new Context(player.getRoom(), player);
         Item item = findItem(actionDto.getItemId());
-        String result = item.use(context);
-        // itemRepository.save(item);
-        return result;
+        if(player.getRoom().getItemList().contains(item)){
+            return  item.use(context);
+        }
+        return "Brak przedmiotu w pokoju.";
     }
 
     public ItemDto getItem(Integer id) {

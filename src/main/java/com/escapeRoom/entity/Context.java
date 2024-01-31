@@ -10,5 +10,11 @@ public class Context {
         this.player = player;
     }
 
+    public Room getRoom() {
+        return room;
+    }
 
+    public Player getPlayer() {
+        return player;
+    }
 }
