@@ -6,17 +6,14 @@ public class PlayerDto {
 
     private int id;
 
-    private int roomId;
-
-
     PlayerDto(){
 
     }
 
-    public PlayerDto(String name, int id, int roomId) {
+    public PlayerDto(String name, int id) {
         this.name = name;
         this.id = id;
-        this.roomId = roomId;
+
     }
 
     public String getName() {
@@ -27,16 +24,13 @@ public class PlayerDto {
         return id;
     }
 
-    public int getRoomId() {
-        return roomId;
-    }
+
 
     @Override
     public String toString() {
         return "PlayerDto{" +
                 "name='" + name + '\'' +
                 ", id=" + id +
-                ", roomId=" + roomId +
                 '}';
     }
 }

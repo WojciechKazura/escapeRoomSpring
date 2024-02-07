@@ -1,6 +1,5 @@
 package com.escapeRoom.service;
 
-import com.escapeRoom.controller.PlayerController;
 import com.escapeRoom.dto.ActionDto;
 import com.escapeRoom.dto.ItemDto;
 import com.escapeRoom.dto.PlayerDto;
@@ -8,7 +7,6 @@ import com.escapeRoom.entity.*;
 import com.escapeRoom.repository.ItemRepository;
 import com.escapeRoom.repository.PlayerRepository;
 import com.escapeRoom.repository.RoomRepository;
-import jakarta.annotation.PostConstruct;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -30,8 +28,6 @@ public class GameService {
     }
 
 
-
-
    public PlayerDto createPlayer(PlayerDto newPlayerDto){
         List<Item> itemList = new ArrayList<>();
         itemList.add(new Window());
@@ -40,7 +36,7 @@ public class GameService {
         itemList.add(new Door(key));
         Player player = new Player(newPlayerDto.getName(), new Room("pierwszy", "obraz1", itemList));
         playerRepository.save(player);
-        PlayerDto finalPlayerDto = new PlayerDto(player.getName(),player.getId(),player.getRoom().getId());
+        PlayerDto finalPlayerDto = new PlayerDto(player.getName(),player.getId());
         return finalPlayerDto;
     }
 
@@ -87,16 +83,17 @@ public class GameService {
     private Item findItem(int itemEntityId) {
         //todo
         return itemRepository.findById(itemEntityId).orElseThrow();
-
-
     }
 
-    public List<ItemDto> getRoomItems(int id) {
+    public List<ItemDto> getItemsByPlayerId(int playerId){
+        Player player = playerRepository.findById(playerId).orElseThrow();
         List<ItemDto> itemDtoList = new ArrayList<>();
-        List<Item> itemList = roomRepository.findById(id).orElseThrow().getItemList();
+        List<Item> itemList =player.getRoom().getItemList();
         for (Item item : itemList) {
             itemDtoList.add(mapToItemDto(item));
         }
         return itemDtoList;
     }
+
+
 }

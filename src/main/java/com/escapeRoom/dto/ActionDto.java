@@ -6,7 +6,6 @@ public class ActionDto {
     private int itemId;
     private int playerId;
 
-
     public ActionDto() {
 
     }

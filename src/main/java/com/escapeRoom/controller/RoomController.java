@@ -18,10 +18,15 @@ public class RoomController {
     public RoomController(GameService gameService) {
         this.gameService = gameService;
     }
-    @GetMapping("/{id}/items")
-    List<ItemDto> getItems(@PathVariable int id){
-        return gameService.getRoomItems(id);
+    @GetMapping()
+    List<ItemDto> getItems(int playerId){ //tymczasowo wysyłamy id grającego playera jako parametr zapytania (docelowo wyciagane z security)
+        return gameService.getItemsByPlayerId(playerId);
     }
 }
 
 //GET: api/v1/rooms/{id}/items/
+
+//GET: api/v1/rooms
+// jesteś adminem? dostajesz wszystkie pokoje
+// jesteś zwykłym graczem? dostajesz swój pokój (system sprawdza id playera i daje jego pokój)
+
