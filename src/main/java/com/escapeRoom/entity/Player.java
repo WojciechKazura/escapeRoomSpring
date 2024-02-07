@@ -14,17 +14,15 @@ public class Player {
     @GeneratedValue
     private int id;
     private String name;
-    private int result;
-    private boolean active;
+
     @OneToMany(cascade=CascadeType.ALL)
     private List<Item> itemList;
 
     @OneToOne(cascade = CascadeType.ALL)
     private Room room;
 
-    public Player(String name, int result,Room room) {
+    public Player(String name, Room room) {
         this.name = name;
-        this.result = result;
         this.room=room;
     }
 
@@ -40,17 +38,10 @@ public class Player {
         return name;
     }
 
-    public int getResult() {
-        return result;
-    }
-
     public int getId() {
         return id;
     }
 
-    public boolean isActive() {
-        return active;
-    }
 
     public List<Item> getItemList() {
         return itemList;

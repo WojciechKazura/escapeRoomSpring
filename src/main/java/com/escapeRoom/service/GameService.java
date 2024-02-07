@@ -1,7 +1,9 @@
 package com.escapeRoom.service;
 
+import com.escapeRoom.controller.PlayerController;
 import com.escapeRoom.dto.ActionDto;
 import com.escapeRoom.dto.ItemDto;
+import com.escapeRoom.dto.PlayerDto;
 import com.escapeRoom.entity.*;
 import com.escapeRoom.repository.ItemRepository;
 import com.escapeRoom.repository.PlayerRepository;
@@ -28,17 +30,18 @@ public class GameService {
     }
 
 
-    @PostConstruct
-    private void prepareDatabase() {
-        if (itemRepository.count() == 0) {
-            List<Item> itemList = new ArrayList<>();
-            itemList.add(new Window());
-            Key key = new Key();
-            itemList.add(key);
-            itemList.add(new Door(key));
-            Player player = new Player("gracz1", 0, new Room("pierwszy", "obraz1", itemList));
-            playerRepository.save(player);
-        }
+
+
+   public PlayerDto createPlayer(PlayerDto newPlayerDto){
+        List<Item> itemList = new ArrayList<>();
+        itemList.add(new Window());
+        Key key = new Key();
+        itemList.add(key);
+        itemList.add(new Door(key));
+        Player player = new Player(newPlayerDto.getName(), new Room("pierwszy", "obraz1", itemList));
+        playerRepository.save(player);
+        PlayerDto finalPlayerDto = new PlayerDto(player.getName(),player.getId(),player.getRoom().getId());
+        return finalPlayerDto;
     }
 
     public void save(ItemDto item) {

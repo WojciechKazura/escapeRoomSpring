@@ -22,8 +22,6 @@ public class RoomController {
     List<ItemDto> getItems(@PathVariable int id){
         return gameService.getRoomItems(id);
     }
-
-
 }
 
 //GET: api/v1/rooms/{id}/items/
