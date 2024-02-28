@@ -11,9 +11,10 @@ import java.util.List;
 public class Player {
 
     @Id
-    @GeneratedValue
     private int id;
     private String name;
+
+    private int howManyCoins=0;
 
     @OneToMany(cascade=CascadeType.ALL)
     private List<Item> itemList;
@@ -21,9 +22,10 @@ public class Player {
     @OneToOne(cascade = CascadeType.ALL)
     private Room room;
 
-    public Player(String name, Room room) {
+    public Player(int id,String name) {
+        this.id=id;
         this.name = name;
-        this.room=room;
+
     }
 
     Player() {
@@ -42,8 +44,19 @@ public class Player {
         return id;
     }
 
-
     public List<Item> getItemList() {
         return itemList;
+    }
+
+    public int getHowManyCoins() {
+        return howManyCoins;
+    }
+
+    public void setHowManyCoins(int howManyCoins) {
+        this.howManyCoins = howManyCoins;
+    }
+
+    public void setRoom(Room room) {
+        this.room = room;
     }
 }

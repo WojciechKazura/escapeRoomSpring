@@ -6,14 +6,15 @@ public class AccountDto {
     private String email;
     private String password;
 
+    private String playerName;
     AccountDto(){
 
     }
-
-    public AccountDto(int id, String email, String password) {
+    public AccountDto(int id, String email, String password, String playerName) {
         this.id = id;
         this.email = email;
         this.password = password;
+        this.playerName = playerName;
     }
 
     public int getId() {
@@ -26,5 +27,9 @@ public class AccountDto {
 
     public String getPassword() {
         return password;
+    }
+
+    public String getPlayerName() {
+        return playerName;
     }
 }

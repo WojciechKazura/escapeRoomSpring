@@ -2,7 +2,7 @@ package com.escapeRoom.entity;
 
 public  enum  ItemType {
 
-    WINDOW, KEY, DOOR;
+    WINDOW, KEY, DOOR, DESK, COIN, BAG;
 
 
 

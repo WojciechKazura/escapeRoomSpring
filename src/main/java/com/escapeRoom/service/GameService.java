@@ -28,16 +28,17 @@ public class GameService {
     }
 
 
-   public PlayerDto createPlayer(PlayerDto newPlayerDto){
+    public Player createPlayer(Player player) {
         List<Item> itemList = new ArrayList<>();
-        itemList.add(new Window());
         Key key = new Key();
-        itemList.add(key);
+        itemList.add(new Desk(new Coin()));
+        itemList.add(new Bag(key));
+        itemList.add(new Window());
+        //itemList.add(key);
         itemList.add(new Door(key));
-        Player player = new Player(newPlayerDto.getName(), new Room("pierwszy", "obraz1", itemList));
-        playerRepository.save(player);
-        PlayerDto finalPlayerDto = new PlayerDto(player.getName(),player.getId());
-        return finalPlayerDto;
+        Room room = new Room("pierwszy", "obraz1", itemList);
+        player.setRoom(room);
+        return playerRepository.save(player);
     }
 
     public void save(ItemDto item) {
@@ -58,8 +59,8 @@ public class GameService {
         Player player = playerRepository.findById(actionDto.getPlayerId()).orElseThrow();
         Context context = new Context(player.getRoom(), player);
         Item item = findItem(actionDto.getItemId());
-        if(player.getRoom().getItemList().contains(item)){
-            return  item.use(context);
+        if (player.getRoom().getItemList().contains(item)) {
+            return item.use(context);
         }
         return "Brak przedmiotu w pokoju.";
     }
@@ -85,10 +86,10 @@ public class GameService {
         return itemRepository.findById(itemEntityId).orElseThrow();
     }
 
-    public List<ItemDto> getItemsByPlayerId(int playerId){
+    public List<ItemDto> getItemsByPlayerId(int playerId) {
         Player player = playerRepository.findById(playerId).orElseThrow();
         List<ItemDto> itemDtoList = new ArrayList<>();
-        List<Item> itemList =player.getRoom().getItemList();
+        List<Item> itemList = player.getRoom().getItemList();
         for (Item item : itemList) {
             itemDtoList.add(mapToItemDto(item));
         }

@@ -21,7 +21,6 @@ public class Door extends Item {
 
     @Override
     public String use(Context context) {
-
         if (!open && context.getPlayer().getItemList().contains(key)) {
             open = true;
             return "Otworzyłeś dzwi kluczem";
@@ -31,7 +30,5 @@ public class Door extends Item {
         }else{
             return "Dzwi zamknięte brak klucza.";
         }
-
-
     }
 }
