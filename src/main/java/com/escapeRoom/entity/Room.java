@@ -16,6 +16,7 @@ public class Room {
     @OneToMany(cascade = CascadeType.ALL)
     private List<Item> itemList;
 
+
     public Room(String name, String image, List<Item> itemList) {
         this.name = name;
         this.image = image;

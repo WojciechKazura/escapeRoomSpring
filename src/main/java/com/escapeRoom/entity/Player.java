@@ -14,22 +14,41 @@ public class Player {
     private int id;
     private String name;
 
-    private int howManyCoins=0;
+    private int howManyCoins = 0;
 
-    @OneToMany(cascade=CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Item> itemList;
 
     @OneToOne(cascade = CascadeType.ALL)
     private Room room;
 
-    public Player(int id,String name) {
-        this.id=id;
+    public Player(int id, String name) {
+        this.id = id;
         this.name = name;
 
     }
 
     Player() {
 
+    }
+
+    boolean pay(int price) {
+        if (howManyCoins > 0 && howManyCoins >= price) {
+            howManyCoins = howManyCoins - price;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public void addItem(Item item) {
+        if(item.getType().equals(ItemType.COIN)){
+            takeCoin();
+        }else{itemList.add(item);}
+    }
+
+   private void takeCoin() {
+        howManyCoins++;
     }
 
     public Room getRoom() {

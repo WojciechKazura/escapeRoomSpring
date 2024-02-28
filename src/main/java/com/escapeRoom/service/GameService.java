@@ -2,7 +2,6 @@ package com.escapeRoom.service;
 
 import com.escapeRoom.dto.ActionDto;
 import com.escapeRoom.dto.ItemDto;
-import com.escapeRoom.dto.PlayerDto;
 import com.escapeRoom.entity.*;
 import com.escapeRoom.repository.ItemRepository;
 import com.escapeRoom.repository.PlayerRepository;
@@ -31,11 +30,14 @@ public class GameService {
     public Player createPlayer(Player player) {
         List<Item> itemList = new ArrayList<>();
         Key key = new Key();
-        itemList.add(new Desk(new Coin()));
-        itemList.add(new Bag(key));
+        itemList.add(new Container(new Coin(),"Desk"));
+        itemList.add(new Container(key,"Bag"));
         itemList.add(new Window());
         //itemList.add(key);
         itemList.add(new Door(key));
+        List<Item> merchantList= new ArrayList<>();
+        merchantList.add(key);
+        itemList.add(new Merchant(merchantList));
         Room room = new Room("pierwszy", "obraz1", itemList);
         player.setRoom(room);
         return playerRepository.save(player);

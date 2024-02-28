@@ -11,7 +11,7 @@ public class Coin extends Item{
     }
 
     @Override
-    public String use(Context context) {
+    public String use(Context context) {// nie używana
         context.getPlayer().getItemList().add(this);
         int howManyCoins=context.getPlayer().getHowManyCoins();
         context.getPlayer().setHowManyCoins(howManyCoins+1);

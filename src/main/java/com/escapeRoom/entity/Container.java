@@ -4,30 +4,31 @@ import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToOne;
 
-import java.util.List;
 
 @Entity
-public class Desk extends Item {
+public class Container extends Item {
+
 
     private boolean isChecked = false;
     @OneToOne(cascade = CascadeType.ALL)
-    private Item itemInDesk;
+    private Item item;
 
 
-    public Desk() {
+    public Container() {
     }
 
-    public Desk(Item item) {
-        super("Desk", ItemType.DESK);
-        this.itemInDesk=item;
+    public Container(Item item, String name) {
+        super(name, ItemType.CONTAINER);
+        this.item =item;
     }
+
 
     @Override
     public String use(Context context) {
         if (!isChecked) {
             isChecked = true;
-            context.getPlayer().getItemList().add(itemInDesk);
-            return "Znajdujesz przedmiot!";
+            context.getPlayer().addItem(item);
+            return "Wyciagasz "+item.getName()+" z "+getName();
         } else {
             return "Nic tu więcej nie ma.";
         }
