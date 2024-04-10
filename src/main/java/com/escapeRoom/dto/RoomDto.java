@@ -1,31 +1,28 @@
-package com.escapeRoom.entity;
+package com.escapeRoom.dto;
 
-import jakarta.persistence.*;
+import com.escapeRoom.entity.Item;
+
 
 import java.util.List;
 
-@Entity()
-@Table(name="Room")
-public class Room {
+public class RoomDto {
 
-    @Id
-    @GeneratedValue
-    private int id;//wrapper
+
+    private int id; //wraper
     private String name;
     private String image;
-    @OneToMany(cascade = CascadeType.ALL)
+
     private List<Item> itemList;
 
 
-
-
-    public Room(String name, String image, List<Item> itemList) {
+    public RoomDto(int id, String name, String image, List<Item> itemList) {//wrapper
+        this.id = id;
         this.name = name;
         this.image = image;
         this.itemList = itemList;
     }
 
-    Room(){
+    RoomDto() {
 
     }
 
@@ -47,10 +44,11 @@ public class Room {
 
     @Override
     public String toString() {
-        return "Room{" +
+        return "RoomDto{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", image=" + image +
+                ", image='" + image + '\'' +
+                ", itemList=" + itemList +
                 '}';
     }
 }

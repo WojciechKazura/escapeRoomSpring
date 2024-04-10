@@ -8,7 +8,7 @@ import jakarta.persistence.Id;
 public class Account {
     @Id
     @GeneratedValue
-    private int id;
+    private int id; //wrapper
     private String email;
     private String password;
 
@@ -21,7 +21,7 @@ public class Account {
         this.password = password;
     }
 
-    public int getId() {
+    public int getId() {//wrapper
         return id;
     }
 

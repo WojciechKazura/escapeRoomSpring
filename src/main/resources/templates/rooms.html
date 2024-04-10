@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Rooms</title>
+    <link href="styles.css" rel="stylesheet"/>
+</head>
+<body>
+<div>
+    <h1>Mamy następujace pokoje.</h1>
+    <div>
+        <table>
+            <thead>
+            <tr>
+                <th>Pokoje.</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="roomDto:${roomsDto} ">
+                <td th:text="${roomDto.id}">
+                    id
+                </td>
+                <td th:text="${roomDto.name}">
+                    name
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+</body>
+</html>

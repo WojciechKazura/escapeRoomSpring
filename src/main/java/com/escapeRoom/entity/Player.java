@@ -1,9 +1,6 @@
 package com.escapeRoom.entity;
 
 import jakarta.persistence.*;
-import org.hibernate.engine.internal.Cascade;
-
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -11,7 +8,8 @@ import java.util.List;
 public class Player {
 
     @Id
-    private int id;
+    @GeneratedValue
+    private Integer id; //wrapper
     private String name;
 
     private int howManyCoins = 0;
@@ -22,7 +20,7 @@ public class Player {
     @OneToOne(cascade = CascadeType.ALL)
     private Room room;
 
-    public Player(int id, String name) {
+    public Player(Integer id, String name) {
         this.id = id;
         this.name = name;
 
@@ -59,7 +57,7 @@ public class Player {
         return name;
     }
 
-    public int getId() {
+    public Integer getId() { //wrapper
         return id;
     }
 

@@ -1,16 +1,15 @@
 package com.escapeRoom.dto;
 
 public class AccountDto {
-
-    private int id;
+// tu jet playre id do wrappera
+    private Integer id; //wrapper
     private String email;
     private String password;
-
     private String playerName;
     AccountDto(){
 
     }
-    public AccountDto(int id, String email, String password, String playerName) {
+    public AccountDto(Integer id, String email, String password, String playerName) {
         this.id = id;
         this.email = email;
         this.password = password;
@@ -31,5 +30,15 @@ public class AccountDto {
 
     public String getPlayerName() {
         return playerName;
+    }
+
+    @Override
+    public String toString() {
+        return "AccountDto{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", playerName='" + playerName + '\'' +
+                '}';
     }
 }

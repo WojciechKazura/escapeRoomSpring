@@ -57,3 +57,11 @@ drop table items [90107-214]
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Błąd składniowy w wyrażeniu SQL "drop [*]items"; oczekiwano "TABLE, INDEX, USER, SEQUENCE, CONSTANT, TRIGGER, VIEW, ROLE, ALIAS, SCHEMA, ALL OBJECTS, DOMAIN, TYPE, DATATYPE, AGGREGATE, SYNONYM"
 Syntax error in SQL statement "drop [*]items"; expected "TABLE, INDEX, USER, SEQUENCE, CONSTANT, TRIGGER, VIEW, ROLE, ALIAS, SCHEMA, ALL OBJECTS, DOMAIN, TYPE, DATATYPE, AGGREGATE, SYNONYM"; SQL statement:
 drop items [42001-214]
+2024-03-02 18:55:49 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Błąd składniowy w wyrażeniu SQL "[*]ITEMS_ITEM_LIST"; oczekiwano "INSERT"
+Syntax error in SQL statement "[*]ITEMS_ITEM_LIST"; expected "INSERT"; SQL statement:
+ITEMS_ITEM_LIST [42001-214]
+2024-03-02 18:55:52 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Błąd składniowy w wyrażeniu SQL "[*]ITEMS_ITEM_LIST ITEMS_ITEM_LIST"; oczekiwano "INSERT"
+Syntax error in SQL statement "[*]ITEMS_ITEM_LIST ITEMS_ITEM_LIST"; expected "INSERT"; SQL statement:
+ITEMS_ITEM_LIST ITEMS_ITEM_LIST [42001-214]
