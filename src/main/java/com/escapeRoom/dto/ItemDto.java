@@ -1,8 +1,6 @@
 package com.escapeRoom.dto;
 
-
 import com.escapeRoom.entity.ItemType;
-import com.escapeRoom.service.GameService;
 
 public class ItemDto {
     //json będą mapowane na ten obiekt i z tego obiektu na jsony

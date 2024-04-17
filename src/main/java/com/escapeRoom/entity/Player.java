@@ -12,17 +12,20 @@ public class Player {
     private Integer id; //wrapper
     private String name;
 
+    private int hp;
+
     private int howManyCoins = 0;
 
     @OneToMany(cascade = CascadeType.ALL)
     private List<Item> itemList;
 
     @OneToOne(cascade = CascadeType.ALL)
-    private Room room;
+    private Room room;// zrocić listę
 
     public Player(Integer id, String name) {
         this.id = id;
         this.name = name;
+        hp=100;
 
     }
 
@@ -57,6 +60,10 @@ public class Player {
         return name;
     }
 
+    public int getHp() {
+        return hp;
+    }
+
     public Integer getId() { //wrapper
         return id;
     }
@@ -75,5 +82,9 @@ public class Player {
 
     public void setRoom(Room room) {
         this.room = room;
+    }
+
+    public void setHp(int hp) {
+        this.hp = hp;
     }
 }

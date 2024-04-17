@@ -6,8 +6,6 @@ import jakarta.persistence.Entity;
 public class Key extends Item {
 
 
-
-
     public Key() {
         super("Key", ItemType.KEY);
 

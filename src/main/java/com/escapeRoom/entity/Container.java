@@ -22,6 +22,9 @@ public class Container extends Item {
         this.item =item;
     }
 
+    public void setItem(Item item) {
+        this.item = item;
+    }
 
     @Override
     public String use(Context context) {

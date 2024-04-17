@@ -6,6 +6,7 @@ import jakarta.persistence.OneToOne;
 @Entity
 public class Door extends Item {
 
+
     private boolean open = false;
     @OneToOne
     private Key key;
@@ -23,7 +24,8 @@ public class Door extends Item {
     public String use(Context context) {
         if (!open && context.getPlayer().getItemList().contains(key)) {
             open = true;
-            return "Otworzyłeś dzwi kluczem";
+            context.getPlayer().setRoom(context.getRoom().getNextRoom());
+            return "Otworzyłeś dzwi kluczem i przechodzisz do kolejnego pokoju";
         } else if (open) {
             open = false;
             return "Drzwi zanknięte";

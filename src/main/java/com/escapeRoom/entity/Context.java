@@ -1,11 +1,14 @@
 package com.escapeRoom.entity;
 
-public class Context {
+import com.escapeRoom.service.GameService;
 
+public class Context {
+    private GameService gameService;
     private Room room;
     private Player player;
 
-    public Context(Room room, Player player) {
+    public Context(GameService gameService,Room room, Player player) {
+        this.gameService=gameService;
         this.room = room;
         this.player = player;
     }
@@ -16,5 +19,9 @@ public class Context {
 
     public Player getPlayer() {
         return player;
+    }
+
+    public GameService getGameService() {
+        return gameService;
     }
 }
