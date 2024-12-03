@@ -2,9 +2,10 @@ package com.escapeRoom.service;
 
 import com.escapeRoom.dto.*;
 import com.escapeRoom.entity.*;
+import com.escapeRoom.repository.GameRepository;
 import com.escapeRoom.repository.ItemRepository;
 import com.escapeRoom.repository.PlayerRepository;
-import com.escapeRoom.repository.RoomRepository;
+import com.escapeRoom.repository.SceneRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -17,37 +18,41 @@ public class GameService {
 
     private ItemRepository itemRepository;
     private PlayerRepository playerRepository;
-    private RoomRepository roomRepository;
+    private SceneRepository sceneRepository;
+    private GameRepository gameRepository;
 
 
-    GameService(ItemRepository itemRepository, PlayerRepository playerRepository, RoomRepository roomRepository) {
+    GameService(ItemRepository itemRepository, PlayerRepository playerRepository, SceneRepository sceneRepository, GameRepository gameRepository) {
         this.itemRepository = itemRepository;
         this.playerRepository = playerRepository;
-        this.roomRepository = roomRepository;
+        this.sceneRepository = sceneRepository;
+        this.gameRepository = gameRepository;
     }
 
 
-    public void createPlayer(Player player) {
-        createRoomsList(player);
+    public Game createGame() {//TODO
+        Game game = new Game();
+        createRoomsList(game);
+        return game;
     }
 
-    public void createRoomsList(Player player) {//to do
+    public void createRoomsList(Game game) {//to do
         Scene scene1 = createRoom("pierwszy", "obraz1");
         Scene scene2 = createRoom("drugi", "obraz2");
         Scene scene3 = createRoom("trzeci", "obraz3");
         Scene scene4 = createRoom("czwarty", "obraz4");
         Scene scene5 = createRoom("piąty", "obraz5");
-        scene1.setNextRoom(scene2);
-        scene2.setNextRoom(scene3);
-        scene3.setNextRoom(scene4);
-        scene4.setNextRoom(scene5);
+        scene1.setNextScene(scene2);
+        scene2.setNextScene(scene3);
+        scene3.setNextScene(scene4);
+        scene4.setNextScene(scene5);
         scene1.getItemList().addAll(prepareRoom1Items(scene1.getKey()));
         scene2.getItemList().addAll(prepareRoom2Items(scene2.getKey()));
         scene3.getItemList().addAll(prepareRoom3Items(scene3.getKey()));
         scene4.getItemList().addAll(prepareRoom4Items(scene4.getKey()));
         scene5.getItemList().addAll(prepareRoom5Items(scene5.getKey()));
-        player.setRoom(scene1);
-        playerRepository.save(player);
+        game.setFirstRoom(scene1);
+        gameRepository.save(game);
     }
 
     private Scene createRoom(String name, String image) {// czy to będzie ten sam klucz
@@ -71,7 +76,6 @@ public class GameService {
     private List<Item> prepareRoom2Items(Key key) {
         List<Item> itemsRoom1 = new ArrayList<>();
         itemsRoom1.add(new Container(new Coin(), "Desk"));
-        itemsRoom1.add(new Window());
         itemsRoom1.add(new Container(key, "Bag"));
         return itemsRoom1;
     }
@@ -125,7 +129,7 @@ public class GameService {
 
     public List<RoomDto> getAllRooms() {
         List<RoomDto> roomDtoList = new ArrayList<>();
-        List<Scene> sceneList = roomRepository.findAll();
+        List<Scene> sceneList = sceneRepository.findAll();
         for (Scene scene : sceneList) {
             roomDtoList.add(mapToRoomDto(scene));
         }

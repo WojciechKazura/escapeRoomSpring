@@ -2,7 +2,7 @@ package com.escapeRoom.service;
 
 import com.escapeRoom.dto.AccountDto;
 import com.escapeRoom.entity.Account;
-import com.escapeRoom.entity.Player;
+import com.escapeRoom.entity.Game;
 import com.escapeRoom.repository.AccountRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,12 +21,13 @@ public class AccountService implements UserDetailsService {
         this.gameService = gameService;
     }
 
+
+
     public AccountDto createAccount(AccountDto accountDto) {
-        Account account = new Account(accountDto.getEmail(), accountDto.getPassword());
+        Game game = gameService.createGame();
+        Account account = new Account(accountDto.getEmail(), accountDto.getPassword(), game);
         accountRepository.save(account);
-        Player player = new Player(account.getId(),accountDto.getPlayerName());
-        gameService.createPlayer(player);
-        AccountDto finalAccountDto = new AccountDto(account.getId(), account.getEmail(), account.getPassword(), player.getName());
+        AccountDto finalAccountDto = new AccountDto(account.getId(), account.getEmail(), account.getPassword(),game.getId());
         return finalAccountDto;
     }
 

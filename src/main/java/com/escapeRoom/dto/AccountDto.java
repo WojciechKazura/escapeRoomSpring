@@ -5,15 +5,17 @@ public class AccountDto {
     private Integer id; //wrapper
     private String email;
     private String password;
-    private String playerName;
+    private Integer gameId;
+
     AccountDto(){
 
     }
-    public AccountDto(Integer id, String email, String password, String playerName) {
+    public AccountDto(Integer id, String email, String password, Integer gameId) {
         this.id = id;
         this.email = email;
         this.password = password;
-        this.playerName = playerName;
+        this.gameId = gameId;
+
     }
 
     public int getId() {
@@ -28,8 +30,8 @@ public class AccountDto {
         return password;
     }
 
-    public String getPlayerName() {
-        return playerName;
+    public Integer getGameId() {
+        return gameId;
     }
 
     @Override
@@ -38,7 +40,7 @@ public class AccountDto {
                 "id=" + id +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
-                ", playerName='" + playerName + '\'' +
+                ", gameId=" + gameId +
                 '}';
     }
 }

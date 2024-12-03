@@ -52,11 +52,11 @@ public class Scene {
         return key;
     }
 
-    public Scene getNextRoom() {
+    public Scene getNextScene() {
         return nextScene;
     }
 
-    public void setNextRoom(Scene nextScene) {
+    public void setNextScene(Scene nextScene) {
         this.nextScene = nextScene;
     }
 

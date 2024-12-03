@@ -23,7 +23,7 @@ public class Door extends Item {
     public String use(Context context) {
         if (!open && context.getPlayer().getItemList().contains(key)) {
             open = true;
-            context.getPlayer().setRoom(context.getRoom().getNextRoom());
+            context.getPlayer().setRoom(context.getRoom().getNextScene());
             return "Otworzyłeś dzwi kluczem i przechodzisz do kolejnego pokoju";
         } else if (open) {
             open = false;

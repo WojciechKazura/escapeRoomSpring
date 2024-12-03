@@ -38,11 +38,13 @@ public class EscapeRoomApplication {
  * */
 
 /*
-* Odpalić starą wersję aplikacji
-* Ogarnąć gita Frontu
+* Odpalić starą wersję aplikacji x
+* Ogarnąć gita Frontu  x
+* poprawić rejestrację by nie ptrzeba było jej  przechodzić za każdym razem x
 * Dodać klasę Gry i dostosować działanie żeby Player nie miał rooma tylko gra wskazywała na aktualnego rooma i playera
 * Scena może prowadzić do innych scen
 * Algorym ścieżek
 * Funkcja podglądu mapy w JS
 * Rozbudowa mapy tak żeby nie było widać miejsc gdzie nie bylismy
+* Znikanie kluczy zuzytych
 * */
