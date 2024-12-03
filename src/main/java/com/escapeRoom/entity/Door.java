@@ -6,7 +6,6 @@ import jakarta.persistence.OneToOne;
 @Entity
 public class Door extends Item {
 
-
     private boolean open = false;
     @OneToOne
     private Key key;

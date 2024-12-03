@@ -32,31 +32,67 @@ public class GameService {
     }
 
     public void createRoomsList(Player player) {//to do
-        Room room1 = createRoom("pierwszy", "obraz1");
-        Room room2 = createRoom("drugi", "obraz2");
-        Room room3 = createRoom("trzeci", "obraz3");
-        Room room4 = createRoom("czwarty", "obraz4");
-        Room room5 = createRoom("piąty", "obraz5");
-        room1.setNextRoom(room2);
-        room2.setNextRoom(room3);
-        room3.setNextRoom(room4);
-        room4.setNextRoom(room5);
-        room1.getItemList().addAll(prepareRoom1Items(room1.getKey()));
-        player.setRoom(room1);
+        Scene scene1 = createRoom("pierwszy", "obraz1");
+        Scene scene2 = createRoom("drugi", "obraz2");
+        Scene scene3 = createRoom("trzeci", "obraz3");
+        Scene scene4 = createRoom("czwarty", "obraz4");
+        Scene scene5 = createRoom("piąty", "obraz5");
+        scene1.setNextRoom(scene2);
+        scene2.setNextRoom(scene3);
+        scene3.setNextRoom(scene4);
+        scene4.setNextRoom(scene5);
+        scene1.getItemList().addAll(prepareRoom1Items(scene1.getKey()));
+        scene2.getItemList().addAll(prepareRoom2Items(scene2.getKey()));
+        scene3.getItemList().addAll(prepareRoom3Items(scene3.getKey()));
+        scene4.getItemList().addAll(prepareRoom4Items(scene4.getKey()));
+        scene5.getItemList().addAll(prepareRoom5Items(scene5.getKey()));
+        player.setRoom(scene1);
         playerRepository.save(player);
     }
 
-    private Room createRoom(String name, String image) {// czy to będzie ten sam klucz
+    private Scene createRoom(String name, String image) {// czy to będzie ten sam klucz
         List<Item> itemList = new ArrayList<>();
         Key key = new Key();
         itemList.add(new Door(key));
         Merchant merchant = prepareMerchant();
         merchant.getItemList().add(key);
         itemList.add(merchant);
-        return new Room(name, image, itemList, key);
+        return new Scene(name, image, itemList, key);
     }
 
     private List<Item> prepareRoom1Items(Key key) {
+        List<Item> itemsRoom1 = new ArrayList<>();
+        itemsRoom1.add(new Container(new Coin(), "Desk"));
+        itemsRoom1.add(new Window());
+        itemsRoom1.add(new Container(key, "Bag"));
+        return itemsRoom1;
+    }
+
+    private List<Item> prepareRoom2Items(Key key) {
+        List<Item> itemsRoom1 = new ArrayList<>();
+        itemsRoom1.add(new Container(new Coin(), "Desk"));
+        itemsRoom1.add(new Window());
+        itemsRoom1.add(new Container(key, "Bag"));
+        return itemsRoom1;
+    }
+
+    private List<Item> prepareRoom3Items(Key key) {
+        List<Item> itemsRoom1 = new ArrayList<>();
+        itemsRoom1.add(new Container(new Coin(), "Desk"));
+        itemsRoom1.add(new Window());
+        itemsRoom1.add(new Container(key, "Bag"));
+        return itemsRoom1;
+    }
+
+    private List<Item> prepareRoom4Items(Key key) {
+        List<Item> itemsRoom1 = new ArrayList<>();
+        itemsRoom1.add(new Container(new Coin(), "Desk"));
+        itemsRoom1.add(new Window());
+        itemsRoom1.add(new Container(key, "Bag"));
+        return itemsRoom1;
+    }
+
+    private List<Item> prepareRoom5Items(Key key) {
         List<Item> itemsRoom1 = new ArrayList<>();
         itemsRoom1.add(new Container(new Coin(), "Desk"));
         itemsRoom1.add(new Window());
@@ -89,9 +125,9 @@ public class GameService {
 
     public List<RoomDto> getAllRooms() {
         List<RoomDto> roomDtoList = new ArrayList<>();
-        List<Room> roomList = roomRepository.findAll();
-        for (Room room : roomList) {
-            roomDtoList.add(mapToRoomDto(room));
+        List<Scene> sceneList = roomRepository.findAll();
+        for (Scene scene : sceneList) {
+            roomDtoList.add(mapToRoomDto(scene));
         }
         return roomDtoList;
     }
@@ -131,8 +167,8 @@ public class GameService {
         return mapToPlayerDto(playerRepository.findById(playerId).orElseThrow());
     }
 
-    private RoomDto mapToRoomDto(Room room) {
-        return new RoomDto(room.getId(), room.getName(), room.getImage(), room.getItemList());
+    private RoomDto mapToRoomDto(Scene scene) {
+        return new RoomDto(scene.getId(), scene.getName(), scene.getImage(), scene.getItemList());
     }
 
     private Item findItem(int itemEntityId) {
@@ -149,6 +185,7 @@ public class GameService {
         }
         return itemDtoList;
     }
-
-
 }
+
+
+

@@ -27,15 +27,33 @@ public class Merchant extends Item {
     }
 
     @Override
-    public String use(Context context) {// dokończyć zakup apteczki
+    public String use(Context context) {
         boolean enoughMoney = context.getPlayer().pay(cost);
         if (enoughMoney) {
-            context.getPlayer().getItemList().add(itemList.remove(0));//tutaj
+            context.getPlayer().getItemList().add(itemList.get(0));
+
             return "Kupujesz pzedmiot.";
         } else {
             return "Nie masz wystarczajacel ilości monet.";
         }
     }
+
+    /*
+    * akcja uzycia + decyzja
+    * akcja uzycia bez decyzji
+    *   room = scena
+    *   nie tylko drzwi przemieszczaja
+    *
+    * pokoj z:
+    * merchant -> przenosi do sklepu
+    * door
+    * window
+    *
+    * sklep merchanta:
+    * kup klucz za 2
+    *
+    *
+    * */
 
 
 

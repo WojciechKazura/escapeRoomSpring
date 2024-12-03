@@ -5,8 +5,8 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity()
-@Table(name="Room")
-public class Room {
+@Table(name="Scene")
+public class Scene {
 
     @Id
     @GeneratedValue
@@ -19,16 +19,16 @@ public class Room {
     private List<Item> itemList;
 
     @ManyToOne(cascade =  CascadeType.ALL)
-    private Room nextRoom;
+    private Scene nextScene;
 
-    public Room(String name, String image, List<Item> itemList, Key key) {
+    public Scene(String name, String image, List<Item> itemList, Key key) {
         this.name = name;
         this.image = image;
         this.itemList = itemList;
         this.key=key;
     }
 
-    Room(){
+    Scene(){
 
     }
 
@@ -52,17 +52,17 @@ public class Room {
         return key;
     }
 
-    public Room getNextRoom() {
-        return nextRoom;
+    public Scene getNextRoom() {
+        return nextScene;
     }
 
-    public void setNextRoom(Room nextRoom) {
-        this.nextRoom = nextRoom;
+    public void setNextRoom(Scene nextScene) {
+        this.nextScene = nextScene;
     }
 
     @Override
     public String toString() {
-        return "Room{" +
+        return "Scene{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", image=" + image +

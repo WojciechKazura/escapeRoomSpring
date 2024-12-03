@@ -20,7 +20,7 @@ public class Player {
     private List<Item> itemList;
 
     @OneToOne(cascade = CascadeType.ALL)
-    private Room room;// zrocić listę
+    private Scene scene;// zrocić listę
 
     public Player(Integer id, String name) {
         this.id = id;
@@ -52,8 +52,8 @@ public class Player {
         howManyCoins++;
     }
 
-    public Room getRoom() {
-        return room;
+    public Scene getRoom() {
+        return scene;
     }
 
     public String getName() {
@@ -80,8 +80,8 @@ public class Player {
         this.howManyCoins = howManyCoins;
     }
 
-    public void setRoom(Room room) {
-        this.room = room;
+    public void setRoom(Scene scene) {
+        this.scene = scene;
     }
 
     public void setHp(int hp) {

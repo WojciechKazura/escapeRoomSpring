@@ -4,17 +4,17 @@ import com.escapeRoom.service.GameService;
 
 public class Context {
     private GameService gameService;
-    private Room room;
+    private Scene scene;
     private Player player;
 
-    public Context(GameService gameService,Room room, Player player) {
+    public Context(GameService gameService, Scene scene, Player player) {
         this.gameService=gameService;
-        this.room = room;
+        this.scene = scene;
         this.player = player;
     }
 
-    public Room getRoom() {
-        return room;
+    public Scene getRoom() {
+        return scene;
     }
 
     public Player getPlayer() {

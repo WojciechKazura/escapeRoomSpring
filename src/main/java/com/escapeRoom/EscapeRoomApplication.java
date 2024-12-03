@@ -20,3 +20,29 @@ public class EscapeRoomApplication {
 *
 * //PlayerDTO musi mieć: id playera, id roomu
 * */
+
+
+/*
+*  stara apka:
+* Scene -> Lokalizacja w której jest gracz. Może to być pokój lub miejsce w pokoju.
+* Jak nazwać scenę będącą fragmentem pokoju?
+*
+ * Player -> Scene -> Items
+ * Action -> Player + Item
+ *
+ * Nowa wersja:
+ * Game -> Player + Rooms + Current Room
+ * Room -> Items + Rooms
+ * Player -> Items
+ * ActionDto -> GameId + ItemId
+ * */
+
+/*
+* Odpalić starą wersję aplikacji
+* Ogarnąć gita Frontu
+* Dodać klasę Gry i dostosować działanie żeby Player nie miał rooma tylko gra wskazywała na aktualnego rooma i playera
+* Scena może prowadzić do innych scen
+* Algorym ścieżek
+* Funkcja podglądu mapy w JS
+* Rozbudowa mapy tak żeby nie było widać miejsc gdzie nie bylismy
+* */

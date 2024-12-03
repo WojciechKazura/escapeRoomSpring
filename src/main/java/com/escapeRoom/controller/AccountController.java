@@ -16,10 +16,7 @@ public class AccountController {
 
     @PostMapping
     public AccountDto createPlayer(@RequestBody AccountDto accountDto){
-        AccountDto accountDto1= accountService.createAccount(accountDto);
-        System.out.println(accountDto1);
-        return accountDto1;
-
+        return accountService.createAccount(accountDto);
     }
 
 

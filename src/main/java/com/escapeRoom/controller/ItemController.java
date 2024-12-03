@@ -2,9 +2,8 @@ package com.escapeRoom.controller;
 
 import com.escapeRoom.dto.ItemDto;
 import com.escapeRoom.service.GameService;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
+
 
 import java.util.List;
 
@@ -19,18 +18,6 @@ public class ItemController {
         this.gameService = gameService;
     }
 
-    @GetMapping("/items")
-    ModelAndView getHomePage() {
-        System.out.println("1234567890");
-        ModelAndView modelAndView = new ModelAndView("home");
-        List<ItemDto> itemList = gameService.getAllItems();
-        modelAndView.addObject("itemsDto", itemList);
-        for (ItemDto itemDto : itemList) {
-            System.out.println("!!!!!!!!!!!!!!!!!11");
-            System.out.println(itemDto);
-        }
-        return modelAndView;
-    }
 
     @GetMapping
     List<ItemDto> getAllItems() {

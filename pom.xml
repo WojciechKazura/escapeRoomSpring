@@ -12,9 +12,9 @@
 	<artifactId>escapeRoom</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>escapeRoom</name>
-	<description>Game of escape room</description>
+	<description>Game of escape scene</description>
 	<properties>
-		<java.version>17</java.version>
+		<java.version>21</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
