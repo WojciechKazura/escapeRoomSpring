@@ -3,43 +3,42 @@ package com.escapeRoom.controller;
 import com.escapeRoom.dto.ItemDto;
 import com.escapeRoom.dto.RoomDto;
 import com.escapeRoom.service.GameService;
-import com.fasterxml.jackson.annotation.JsonGetter;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("api/v1/rooms")
+@RequestMapping("api/v1/games")
 @CrossOrigin()
-public class RoomController {
+public class GameController {
 
     private GameService gameService;
 
-    public RoomController(GameService gameService) {
+    public GameController(GameService gameService) {
         this.gameService = gameService;
     }
 
-    @GetMapping()
-//wrpper!!!!!!!!!!!!!!!!!!!!!!//to było tutaj!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    List<ItemDto> getItems(Integer playerId) { //tymczasowo wysyłamy id grającego playera jako parametr zapytania (docelowo wyciagane z security)
-
-        return gameService.getItemsByPlayerId(playerId);
+    @GetMapping("{id}/items")
+    List<ItemDto> getItems(@PathVariable int id) {
+        return gameService.getItemsByGameId(id);
     }
 
-    @GetMapping("/rooms")
+    /*@GetMapping("/rooms")
     ModelAndView getHomePage() {
         ModelAndView modelAndView = new ModelAndView("rooms");
         List<RoomDto> roomDtoList = gameService.getAllRooms();
         modelAndView.addObject("RoomsDto", roomDtoList);
         return modelAndView;
-    }
+    }*/
 
 
 }
+// {id} -> @PathVariable
+// z json -> @RequestBody
+// z parametru (?id=10) -> @RequestParam
+
+
 
 //GET: api/v1/rooms/{id}/items/
 

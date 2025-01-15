@@ -1,9 +1,6 @@
 package com.escapeRoom.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 
 @Entity
 public class Account {
@@ -12,7 +9,7 @@ public class Account {
     private int id; //wrapper
     private String email;
     private String password;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Game game;
 
     Account() {

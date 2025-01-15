@@ -1,27 +1,22 @@
 package com.escapeRoom.entity;
 
-import com.escapeRoom.service.GameService;
 
 public class Context {
-    private GameService gameService;
-    private Scene scene;
-    private Player player;
+    private Game game;
 
-    public Context(GameService gameService, Scene scene, Player player) {
-        this.gameService=gameService;
-        this.scene = scene;
-        this.player = player;
+    public Context(Game game) {
+        this.game = game;
     }
 
     public Scene getRoom() {
-        return scene;
+        return game.getActiveScene();
     }
 
     public Player getPlayer() {
-        return player;
+        return game.getPlayer();
     }
 
-    public GameService getGameService() {
-        return gameService;
+    public Game getGame() {
+        return game;
     }
 }

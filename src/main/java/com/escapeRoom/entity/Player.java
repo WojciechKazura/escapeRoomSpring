@@ -1,6 +1,8 @@
 package com.escapeRoom.entity;
 
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -17,7 +19,7 @@ public class Player {
     private int howManyCoins = 0;
 
     @OneToMany(cascade = CascadeType.ALL)
-    private List<Item> itemList;
+    private List<Item> itemList = new ArrayList<>();
 
     public Player(Integer id, String name) {
         this.id = id;

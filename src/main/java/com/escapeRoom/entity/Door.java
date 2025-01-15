@@ -1,6 +1,7 @@
 package com.escapeRoom.entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 
 @Entity
@@ -9,9 +10,11 @@ public class Door extends Item {
     private boolean open = false;
     @OneToOne
     private Key key;
+    @ManyToOne
+    private Scene targetScene;
 
-    public Door() {
-
+    public Door(Scene scene) {
+        this.targetScene = scene;
     }
 
     public Door(Key key) {
@@ -21,9 +24,14 @@ public class Door extends Item {
 
     @Override
     public String use(Context context) {
+        if(key == null){
+            open = true;
+            context.getGame().setActiveScene(targetScene);
+            return "Otworzyłeś dzwi i przechodzisz do kolejnego pokoju";
+        }
         if (!open && context.getPlayer().getItemList().contains(key)) {
             open = true;
-            context.getPlayer().setRoom(context.getRoom().getNextScene());
+            context.getGame().setActiveScene(targetScene);
             return "Otworzyłeś dzwi kluczem i przechodzisz do kolejnego pokoju";
         } else if (open) {
             open = false;

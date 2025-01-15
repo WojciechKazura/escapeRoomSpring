@@ -2,6 +2,7 @@ package com.escapeRoom.entity;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity()
@@ -16,16 +17,15 @@ public class Scene {
     @ManyToOne
     private Key key;
     @OneToMany(cascade = CascadeType.ALL)
-    private List<Item> itemList;
+    private List<Item> itemList = new ArrayList<>();
 
-    @ManyToOne(cascade =  CascadeType.ALL)
-    private Scene nextScene;
+    @ManyToMany(cascade =  CascadeType.ALL)
+    private List<Scene> nextScenes;
 
-    public Scene(String name, String image, List<Item> itemList, Key key) {
+    public Scene(String name, String image, List<Item> itemList) {
         this.name = name;
         this.image = image;
         this.itemList = itemList;
-        this.key=key;
     }
 
     Scene(){
@@ -52,12 +52,15 @@ public class Scene {
         return key;
     }
 
-    public Scene getNextScene() {
-        return nextScene;
+    public List<Scene> getNextScenes() {
+        return nextScenes;
     }
 
-    public void setNextScene(Scene nextScene) {
-        this.nextScene = nextScene;
+    public void setNextScenes(List<Scene> scenes) {
+        this.nextScenes = scenes;
+        for (Scene scene : scenes) {
+            itemList.add(new Door(scene));
+        }
     }
 
     @Override

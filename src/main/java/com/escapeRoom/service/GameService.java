@@ -30,18 +30,19 @@ public class GameService {
     }
 
 
-    public Game createGame() {//TODO
+    public Game createGame() {
         Game game = new Game();
-        createRoomsList(game);
+//        createRoomsList(game);
         return game;
     }
 
-    public void createRoomsList(Game game) {//to do
+    /*public void createRoomsList(Game game) {//to do
         Scene scene1 = createRoom("pierwszy", "obraz1");
         Scene scene2 = createRoom("drugi", "obraz2");
         Scene scene3 = createRoom("trzeci", "obraz3");
         Scene scene4 = createRoom("czwarty", "obraz4");
         Scene scene5 = createRoom("piąty", "obraz5");
+        //todo z mapy next scena robienie gry i klucza
         scene1.setNextScene(scene2);
         scene2.setNextScene(scene3);
         scene3.setNextScene(scene4);
@@ -51,7 +52,7 @@ public class GameService {
         scene3.getItemList().addAll(prepareRoom3Items(scene3.getKey()));
         scene4.getItemList().addAll(prepareRoom4Items(scene4.getKey()));
         scene5.getItemList().addAll(prepareRoom5Items(scene5.getKey()));
-        game.setFirstRoom(scene1);
+        game.setFirstScene(scene1);
         gameRepository.save(game);
     }
 
@@ -108,7 +109,7 @@ public class GameService {
         List<Item> merchantList = new ArrayList<>();
         merchantList.add(new FirstAidKit());
         return new Merchant(merchantList);
-    }
+    }*/
 
 
     public void save(ItemDto item) {
@@ -138,13 +139,12 @@ public class GameService {
 
     // @Transactional
     public ActionResultDto doAction(ActionDto actionDto) {
-        Player player = playerRepository.findById(actionDto.getPlayerId()).orElseThrow();
-        Context context = new Context(this, player.getRoom(), player);
+        Game game = gameRepository.findById(actionDto.getGameId()).orElseThrow();
+        Context context = new Context(game);
         Item item = findItem(actionDto.getItemId());
-        if (player.getRoom().getItemList().contains(item)) {
-            return new ActionResultDto(item.use(context));
-        }
-        return new ActionResultDto("Brak przedmiotu w pokoju.");
+        ActionResultDto action = new ActionResultDto(item.use(context));
+        gameRepository.save(game);
+        return action;
     }
 
     public ItemDto getItem(Integer id) {
@@ -176,14 +176,13 @@ public class GameService {
     }
 
     private Item findItem(int itemEntityId) {
-        //todo
         return itemRepository.findById(itemEntityId).orElseThrow();
     }
 
-    public List<ItemDto> getItemsByPlayerId(int playerId) {//wrapper!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!111
-        Player player = playerRepository.findById(playerId).orElseThrow();//id na sztywno!!!!!!!!!!!!!!!!!!!!!111
+    public List<ItemDto> getItemsByGameId(int gameId) {
+        Game game = gameRepository.findById(gameId).orElseThrow();
         List<ItemDto> itemDtoList = new ArrayList<>();
-        List<Item> itemList = player.getRoom().getItemList();
+        List<Item> itemList = game.getActiveScene().getItemList();
         for (Item item : itemList) {
             itemDtoList.add(mapToItemDto(item));
         }
