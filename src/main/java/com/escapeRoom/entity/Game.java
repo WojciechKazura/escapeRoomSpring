@@ -23,7 +23,7 @@ public class Game {
 
     public Game() {
         player = new Player();
-        firstScene = new Scene();
+        firstScene = new Scene(this);
         activeScene = firstScene;
         createMap(firstScene);
     }
@@ -42,7 +42,7 @@ public class Game {
         List<Scene> roomList = new ArrayList<>();
         if (splitChance < chanceForSplit) {
             for (int i = 0; i < 2; i++) {
-                Scene nextRoom = new Scene();
+                Scene nextRoom = new Scene(this);
                 roomList.add(nextRoom);
             }
             chanceForSplit=chanceForSplit-0.05;
@@ -50,7 +50,7 @@ public class Game {
         }
         double soloChance = random.nextDouble();
         if (soloChance < 0.5) {
-            Scene nextRoom = new Scene();
+            Scene nextRoom = new Scene(this);
             roomList.add(nextRoom);
         }
         return roomList;

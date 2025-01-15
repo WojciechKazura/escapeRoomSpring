@@ -188,6 +188,15 @@ public class GameService {
         }
         return itemDtoList;
     }
+
+    public List<ConnectionDTO> getConnections(int gameId) {
+        List<Scene> scenes = sceneRepository.getRooms(gameId);
+        List<ConnectionDTO> connectionViews = new ArrayList<>();
+        for(Scene scene: scenes){
+            connectionViews.addAll(scene.getConnectionsDts());
+        }
+        return connectionViews;
+    }
 }
 
 

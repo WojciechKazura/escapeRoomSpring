@@ -1,12 +1,12 @@
 package com.escapeRoom.entity;
 
+import com.escapeRoom.dto.ConnectionDTO;
 import jakarta.persistence.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity()
-@Table(name="Scene")
+@Table(name = "Scene")
 public class Scene {
 
     @Id
@@ -18,8 +18,10 @@ public class Scene {
     private Key key;
     @OneToMany(cascade = CascadeType.ALL)
     private List<Item> itemList = new ArrayList<>();
+    @ManyToOne
+    private Game game;
 
-    @ManyToMany(cascade =  CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL)
     private List<Scene> nextScenes;
 
     public Scene(String name, String image, List<Item> itemList) {
@@ -28,8 +30,11 @@ public class Scene {
         this.itemList = itemList;
     }
 
-    Scene(){
+    Scene(Game game) {
+        this.game = game;
+    }
 
+    public Scene() {
     }
 
     public int getId() {//wrapper
@@ -70,5 +75,14 @@ public class Scene {
                 ", name='" + name + '\'' +
                 ", image=" + image +
                 '}';
+    }
+
+    public List<ConnectionDTO> getConnectionsDts() {
+        List<ConnectionDTO> connectionViews = new ArrayList<>();
+        for (Scene scene : nextScenes) {
+            ConnectionDTO connectionDTO = new ConnectionDTO(id, scene.id);
+            connectionViews.add(connectionDTO);
+        }
+        return connectionViews;
     }
 }
