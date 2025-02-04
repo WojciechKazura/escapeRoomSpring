@@ -128,13 +128,13 @@ public class GameService {
         return itemDtoList;
     }
 
-    public List<RoomDto> getAllRooms() {
-        List<RoomDto> roomDtoList = new ArrayList<>();
+    public List<SceneDto> getAllRooms() {
+        List<SceneDto> sceneDtoList = new ArrayList<>();
         List<Scene> sceneList = sceneRepository.findAll();
         for (Scene scene : sceneList) {
-            roomDtoList.add(mapToRoomDto(scene));
+            sceneDtoList.add(mapToSceneDto(scene));
         }
-        return roomDtoList;
+        return sceneDtoList;
     }
 
     // @Transactional
@@ -171,27 +171,23 @@ public class GameService {
         return new PlayerDto(player.getName(), player.getId(), player.getHowManyCoins(), convertItemsToItemDto(player.getItemList()));
     }
 
-    public PlayerDto findPlayerByID(int playerId) {
-        return mapToPlayerDto(playerRepository.findById(playerId).orElseThrow());
+    public PlayerDto findPlayerByGameID(int gameId) {
+        return mapToPlayerDto(gameRepository.findById(gameId).orElseThrow().getPlayer());
     }
 
-    private RoomDto mapToRoomDto(Scene scene) {
-        return new RoomDto(scene.getId(), scene.getName(), scene.getImage(), scene.getItemList());
+    private SceneDto mapToSceneDto(Scene scene) {
+        return new SceneDto(scene.getId(), scene.getName(), scene.getImage(),
+                scene.getItemList().stream().map(item ->mapToItemDto(item)).toList());
     }
 
     private Item findItem(int itemEntityId) {
         return itemRepository.findById(itemEntityId).orElseThrow();
     }
 
-    public List<ItemDto> getItemsByActiveScene(int gameId) {
+    public SceneDto getItemsByActiveScene(int gameId) {
         Game game = gameRepository.findById(gameId).orElseThrow();
-        List<ItemDto> itemDtoList = new ArrayList<>();
-        List<Item> itemList = game.getActiveScene().getItemList();
-        for (Item item : itemList) {
-            System.out.println(item.getName());
-            itemDtoList.add(mapToItemDto(item));
-        }
-        return itemDtoList;
+        return mapToSceneDto(game.getActiveScene());
+
     }
 
     public List<ConnectionDTO> getConnections(int gameId) {
@@ -206,10 +202,10 @@ public class GameService {
     GameDto mapToDTO(Game game) {
         List<Scene> rooms = sceneRepository.getRooms(game.getId());
         return new GameDto(game.getId(),
-               new RoomDto(game.getFirstScene().getId()),
+               new SceneDto(game.getFirstScene().getId()),
                 getConnections(game.getId()),
                 game.getActiveScene().getId(),
-                rooms.stream().map(room -> new RoomDto(room.getId())).toList());
+                rooms.stream().map(room -> new SceneDto(room.getId())).toList());
     }
 }
 

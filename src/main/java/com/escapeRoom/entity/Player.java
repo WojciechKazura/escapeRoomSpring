@@ -29,7 +29,9 @@ public class Player {
     }
 
     Player() {
-
+        Coin coin=new Coin();
+        itemList.add(coin);
+        howManyCoins++;
     }
 
     boolean pay(int price) {

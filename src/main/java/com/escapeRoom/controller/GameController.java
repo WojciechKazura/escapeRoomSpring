@@ -1,8 +1,6 @@
 package com.escapeRoom.controller;
 
-import com.escapeRoom.dto.ConnectionDTO;
-import com.escapeRoom.dto.GameDto;
-import com.escapeRoom.dto.ItemDto;
+import com.escapeRoom.dto.*;
 import com.escapeRoom.service.GameService;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,8 +17,8 @@ public class GameController {
         this.gameService = gameService;
     }
 
-    @GetMapping("{id}/items")
-    List<ItemDto> getItems(@PathVariable int id) {
+    @GetMapping("{id}/active-scene")
+    SceneDto getActiveScene(@PathVariable int id) {
         return gameService.getItemsByActiveScene(id);
     }
 
@@ -34,10 +32,15 @@ public class GameController {
         return gameService.getGameDto(id);
     }
 
+    @GetMapping("/{id}/player")
+    PlayerDto playerDto (@PathVariable int id){
+        return gameService.findPlayerByGameID(id);
+    }
+
     /*@GetMapping("/rooms")
     ModelAndView getHomePage() {
         ModelAndView modelAndView = new ModelAndView("rooms");
-        List<RoomDto> roomDtoList = gameService.getAllRooms();
+        List<SceneDto> roomDtoList = gameService.getAllRooms();
         modelAndView.addObject("RoomsDto", roomDtoList);
         return modelAndView;
     }*/

@@ -5,18 +5,18 @@ import java.util.List;
 public class GameDto {
 
     private int id;
-    private RoomDto firstRoom;
+    private SceneDto firstRoom;
     private int activeRoom;
     private List<ConnectionDTO> connections;
-    private List<RoomDto> rooms;
+    private List<SceneDto> rooms;
 
 
     public GameDto() {
     }
 
-    public GameDto(int id, RoomDto roomDTO, List<ConnectionDTO> connections, int activeRoom, List<RoomDto>roomsList ) {
+    public GameDto(int id, SceneDto sceneDTO, List<ConnectionDTO> connections, int activeRoom, List<SceneDto>roomsList ) {
         this.id = id;
-        this.firstRoom =roomDTO;
+        this.firstRoom = sceneDTO;
         this.connections = connections;
         this.activeRoom=activeRoom;
         this.rooms=roomsList;
@@ -26,11 +26,11 @@ public class GameDto {
         return id;
     }
 
-    public RoomDto getFirstRoom() {
+    public SceneDto getFirstRoom() {
         return firstRoom;
     }
 
-    public List<RoomDto> getRooms() {
+    public List<SceneDto> getRooms() {
         return rooms;
     }
 
@@ -47,7 +47,7 @@ public class GameDto {
         this.id = id;
     }
 
-    public void setFirstRoom(RoomDto firstRoom) {
+    public void setFirstRoom(SceneDto firstRoom) {
         this.firstRoom = firstRoom;
     }
 

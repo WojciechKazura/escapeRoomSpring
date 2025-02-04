@@ -5,28 +5,28 @@ import com.escapeRoom.entity.Item;
 
 import java.util.List;
 
-public class RoomDto {
+public class SceneDto {
 
 
     private int id; //wraper
     private String name;
     private String image;
 
-    private List<Item> itemList;
+    private List<ItemDto> itemList;
 
 
-    public RoomDto(int id, String name, String image, List<Item> itemList) {//wrapper
+    public SceneDto(int id, String name, String image, List<ItemDto> itemList) {//wrapper
         this.id = id;
         this.name = name;
         this.image = image;
         this.itemList = itemList;
     }
 
-    public RoomDto(int id){
+    public SceneDto(int id){
         this.id=id;
     }
 
-    RoomDto() {
+    SceneDto() {
 
     }
 
@@ -42,13 +42,13 @@ public class RoomDto {
         return image;
     }
 
-    public List<Item> getItemList() {
+    public List<ItemDto> getItemList() {
         return itemList;
     }
 
     @Override
     public String toString() {
-        return "RoomDto{" +
+        return "SceneDto{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", image='" + image + '\'' +
