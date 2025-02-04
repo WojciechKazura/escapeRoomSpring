@@ -151,6 +151,10 @@ public class GameService {
         return mapToItemDto(itemRepository.findById(id).orElseThrow());
     }
 
+    public GameDto getGameDto(Integer id){
+        return mapToDTO(gameRepository.findById(id).orElseThrow());
+    }
+
     private Item mapToItem(ItemDto itemDto) {
         return switch (itemDto.getItemType()) {
             case WINDOW -> new Window();
@@ -179,11 +183,12 @@ public class GameService {
         return itemRepository.findById(itemEntityId).orElseThrow();
     }
 
-    public List<ItemDto> getItemsByGameId(int gameId) {
+    public List<ItemDto> getItemsByActiveScene(int gameId) {
         Game game = gameRepository.findById(gameId).orElseThrow();
         List<ItemDto> itemDtoList = new ArrayList<>();
         List<Item> itemList = game.getActiveScene().getItemList();
         for (Item item : itemList) {
+            System.out.println(item.getName());
             itemDtoList.add(mapToItemDto(item));
         }
         return itemDtoList;
@@ -196,6 +201,15 @@ public class GameService {
             connectionViews.addAll(scene.getConnectionsDts());
         }
         return connectionViews;
+    }
+
+    GameDto mapToDTO(Game game) {
+        List<Scene> rooms = sceneRepository.getRooms(game.getId());
+        return new GameDto(game.getId(),
+               new RoomDto(game.getFirstScene().getId()),
+                getConnections(game.getId()),
+                game.getActiveScene().getId(),
+                rooms.stream().map(room -> new RoomDto(room.getId())).toList());
     }
 }
 

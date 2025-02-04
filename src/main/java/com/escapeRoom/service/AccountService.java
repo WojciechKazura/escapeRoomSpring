@@ -21,16 +21,14 @@ public class AccountService implements UserDetailsService {
         this.gameService = gameService;
     }
 
-
-
     public AccountDto createAccount(AccountDto accountDto) {
         Game game = gameService.createGame();
         Account account = new Account(accountDto.getEmail(), accountDto.getPassword(), game);
         accountRepository.save(account);
         AccountDto finalAccountDto = new AccountDto(account.getId(), account.getEmail(), account.getPassword(),game.getId());
+        System.out.println(finalAccountDto);
         return finalAccountDto;
     }
-
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

@@ -32,6 +32,8 @@ public class Scene {
 
     Scene(Game game) {
         this.game = game;
+        Window window = new Window();
+        itemList.add(window);
     }
 
     public Scene() {

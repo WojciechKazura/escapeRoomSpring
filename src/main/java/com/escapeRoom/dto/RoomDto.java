@@ -22,6 +22,10 @@ public class RoomDto {
         this.itemList = itemList;
     }
 
+    public RoomDto(int id){
+        this.id=id;
+    }
+
     RoomDto() {
 
     }

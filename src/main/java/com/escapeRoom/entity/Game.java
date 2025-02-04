@@ -28,6 +28,8 @@ public class Game {
         createMap(firstScene);
     }
 
+
+
     public void createMap(Scene scene){
         List<Scene> roomList= createConnections();
         scene.setNextScenes(roomList);
@@ -72,6 +74,14 @@ public class Game {
 
     public Player getPlayer() {
         return player;
+    }
+
+    public Scene getFirstScene() {
+        return firstScene;
+    }
+
+    public double getChanceForSplit() {
+        return chanceForSplit;
     }
 
     public void setActiveScene(Scene targetScene) {

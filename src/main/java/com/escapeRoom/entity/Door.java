@@ -13,8 +13,12 @@ public class Door extends Item {
     @ManyToOne
     private Scene targetScene;
 
+    public Door() {
+    }
+
     public Door(Scene scene) {
-        this.targetScene = scene;
+        super("Door", ItemType.DOOR);
+       this.targetScene = scene;
     }
 
     public Door(Key key) {

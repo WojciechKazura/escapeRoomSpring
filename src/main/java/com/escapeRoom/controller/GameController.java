@@ -1,10 +1,10 @@
 package com.escapeRoom.controller;
 
 import com.escapeRoom.dto.ConnectionDTO;
+import com.escapeRoom.dto.GameDto;
 import com.escapeRoom.dto.ItemDto;
 import com.escapeRoom.service.GameService;
 import org.springframework.web.bind.annotation.*;
-
 
 import java.util.List;
 
@@ -21,12 +21,17 @@ public class GameController {
 
     @GetMapping("{id}/items")
     List<ItemDto> getItems(@PathVariable int id) {
-        return gameService.getItemsByGameId(id);
+        return gameService.getItemsByActiveScene(id);
     }
 
     @GetMapping("/{id}/connections")
     List<ConnectionDTO> getConnections(@PathVariable int id) {
         return gameService.getConnections(id);
+    }
+
+    @GetMapping("/{id}")
+    GameDto getGame(@PathVariable int id) {
+        return gameService.getGameDto(id);
     }
 
     /*@GetMapping("/rooms")
