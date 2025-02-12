@@ -3,6 +3,8 @@ package com.escapeRoom.entity;
 import com.escapeRoom.dto.ConnectionDTO;
 import jakarta.persistence.*;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 @Entity()
@@ -32,8 +34,6 @@ public class Scene {
 
     Scene(Game game) {
         this.game = game;
-        Window window = new Window();
-        itemList.add(window);
     }
 
     public Scene() {
@@ -63,10 +63,22 @@ public class Scene {
         return nextScenes;
     }
 
+    public void lockRandomDoor(Key key) {
+        Collections.shuffle(itemList);
+        for (Item item : itemList) {
+            if (item.getType() == ItemType.DOOR) {
+                Door door = (Door) item;
+                door.lock(key);
+                return;
+            }
+        }
+    }
+
     public void setNextScenes(List<Scene> scenes) {
         this.nextScenes = scenes;
         for (Scene scene : scenes) {
             itemList.add(new Door(scene));
+            scene.itemList.add(new Door(this));
         }
     }
 
@@ -86,5 +98,9 @@ public class Scene {
             connectionViews.add(connectionDTO);
         }
         return connectionViews;
+    }
+
+    public void addItems(List<Item> newItems) {
+        itemList.addAll(newItems);
     }
 }

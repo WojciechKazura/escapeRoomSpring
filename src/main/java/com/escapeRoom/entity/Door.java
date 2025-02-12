@@ -2,13 +2,12 @@ package com.escapeRoom.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 
 @Entity
 public class Door extends Item {
 
-    private boolean open = false;
-    @OneToOne
+    private boolean open = true;
+    @ManyToOne
     private Key key;
     @ManyToOne
     private Scene targetScene;
@@ -43,5 +42,19 @@ public class Door extends Item {
         }else{
             return "Dzwi zamknięte brak klucza.";
         }
+    }
+    @Override
+    public String getName(){
+        String closeLabel = "";
+        if (!open) {
+            closeLabel = " zamknięte";
+        }
+        return super.getName()+" "+targetScene.getId() + closeLabel;
+    }
+
+    public void lock(Key key) {
+        this.key = key;
+        key.setLabel(targetScene.getId());
+        open = false;
     }
 }

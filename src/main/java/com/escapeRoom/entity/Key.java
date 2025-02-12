@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 @Entity
 public class Key extends Item {
 
+    private String label = "";
+
 
     public Key() {
         super("Key", ItemType.KEY);
@@ -26,5 +28,13 @@ public class Key extends Item {
     }
 
 
+    public void setLabel(int nr) {
+        label = " " + nr;
+    }
+
+    @Override
+    public String getName() {
+        return super.getName() + label;
+    }
 }
 

@@ -25,8 +25,8 @@ public class AccountService implements UserDetailsService {
         Game game = gameService.createGame();
         Account account = new Account(accountDto.getEmail(), accountDto.getPassword(), game);
         accountRepository.save(account);
-        AccountDto finalAccountDto = new AccountDto(account.getId(), account.getEmail(), account.getPassword(),game.getId());
-        System.out.println(finalAccountDto);
+        AccountDto finalAccountDto = new AccountDto(account.getId(), account.getEmail(), account.getPassword(), game.getId());
+        gameService.addScenarios(game);
         return finalAccountDto;
     }
 

@@ -20,13 +20,15 @@ public class GameService {
     private PlayerRepository playerRepository;
     private SceneRepository sceneRepository;
     private GameRepository gameRepository;
+    private RoomScenariosFactory roomScenariosFactory;
 
 
-    GameService(ItemRepository itemRepository, PlayerRepository playerRepository, SceneRepository sceneRepository, GameRepository gameRepository) {
+    GameService(ItemRepository itemRepository, PlayerRepository playerRepository, SceneRepository sceneRepository, GameRepository gameRepository, RoomScenariosFactory roomScenariosFactory) {
         this.itemRepository = itemRepository;
         this.playerRepository = playerRepository;
         this.sceneRepository = sceneRepository;
         this.gameRepository = gameRepository;
+        this.roomScenariosFactory = roomScenariosFactory;
     }
 
 
@@ -206,6 +208,14 @@ public class GameService {
                 getConnections(game.getId()),
                 game.getActiveScene().getId(),
                 rooms.stream().map(room -> new SceneDto(room.getId())).toList());
+    }
+
+    public void addScenarios(Game game) {
+        List<Scene> rooms = sceneRepository.getRooms(game.getId());
+        for (Scene room : rooms) {
+            roomScenariosFactory.addRandomScenario(room);
+        }
+        sceneRepository.saveAll(rooms);
     }
 }
 

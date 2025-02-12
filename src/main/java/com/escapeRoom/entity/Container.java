@@ -1,7 +1,8 @@
 package com.escapeRoom.entity;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 
 
@@ -10,7 +11,7 @@ public class Container extends Item {
 
 
     private boolean isChecked = false;
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Item item;
 
 
