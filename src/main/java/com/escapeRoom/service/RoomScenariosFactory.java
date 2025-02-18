@@ -6,12 +6,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 @Service
 public class RoomScenariosFactory {
-    private static final int SCENARIOS_COUNT = 2;
+    private static final int SCENARIOS_COUNT = 3;
     private ItemRepository itemRepository;
 
     public RoomScenariosFactory(ItemRepository itemRepository) {
@@ -28,6 +27,9 @@ public class RoomScenariosFactory {
                 break;
             case 2:
                 newItems = createScenario2(scene);
+                break;
+            case 3:
+                newItems = createScenario3(scene);
                 break;
         }
         scene.addItems(newItems);
@@ -46,6 +48,19 @@ public class RoomScenariosFactory {
     private List<Item> createScenario2(Scene scene) {
         List<Item> newItems = new ArrayList<>();
         newItems.add(new Window());
+        return newItems;
+    }
+    private List<Item>createScenario3(Scene scene){
+        List<Item> newItems = new ArrayList<>();
+        Key key = new Key();
+        itemRepository.save(key);
+        CodeForProtectContainer c = new CodeForProtectContainer();
+        itemRepository.save(c);
+        Picture picture = new Picture(c);
+        newItems.add(picture);
+        scene.lockRandomDoor(key);
+        ProtectContainer protectContainer = new ProtectContainer("sefj",key,c);
+        newItems.add(protectContainer);
         return newItems;
     }
 

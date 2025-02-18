@@ -2,8 +2,6 @@ package com.escapeRoom.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 
 
 @Entity
@@ -13,7 +11,6 @@ public class Container extends Item {
     private boolean isChecked = false;
     @ManyToOne
     private Item item;
-
 
     public Container() {
     }

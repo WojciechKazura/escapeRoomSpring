@@ -2,7 +2,6 @@ package com.escapeRoom.dto;
 
 public class ActionDto {
 
-    //id itemu
     private int itemId;
     private int gameId;
 

@@ -7,7 +7,6 @@ public class Key extends Item {
 
     private String label = "";
 
-
     public Key() {
         super("Key", ItemType.KEY);
 
