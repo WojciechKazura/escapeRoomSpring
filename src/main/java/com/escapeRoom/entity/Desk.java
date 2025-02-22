@@ -24,8 +24,8 @@ public class Desk extends Item {
     public Desk() {
     }
 
-    public Desk(String name,Container container,Item item) {
-        super(name, ItemType.FURNITURE);
+    public Desk(Container container,Item item) {
+        super("Biurko", ItemType.FURNITURE);
         this.container=container;
         this.fourNumbersCodeForLamps=createCode();
         this.item=item;
@@ -43,9 +43,10 @@ public class Desk extends Item {
         if(!isEmptyContainer){
             isEmptyContainer=true;
             context.getRoom().getItemList().add(container);
-            return "Biutko ma ukryta szuflade!";
+            context.getRoom().getItemList().add(item);
+            return "Biurko ma ukrytą szuflade!, Na blacie jest przytwierdone małe "+item.getName();
         }else{
-            return "Nic tu więcej nie ma.";
+            return "W szufladzie nic wiecej nie ma na blacie jest "+item.getName() ;
         }
     }
 

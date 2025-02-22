@@ -1,10 +1,8 @@
 package com.escapeRoom.entity;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
 
@@ -16,16 +14,21 @@ public class Button extends Item {
     @JoinColumn(name = "button_id")
     private List<Item> itemList;
 
+    @Setter
+    @ManyToOne
+    private Container container;
+
     public Button() {
     }
 
-    public Button(List<Item> itemList) {
+    public Button(List<Item> itemList, Container container) {
         super("Przycisk na ścianie", ItemType.BUTTON);
         this.itemList = itemList;
+        this.container = container;
     }
 
     Boolean checkCode() {
-       int allPartsOfCode = (int) itemList.stream()
+        int allPartsOfCode = (int) itemList.stream()
                 .filter(item -> item instanceof Lamp)
                 .map(item -> (Lamp) item)
                 .filter(Lamp::isCode)
@@ -36,46 +39,14 @@ public class Button extends Item {
 
     @Override
     public String use(Context context) {
-        return checkCode() ? "Udało się" : "Niepoprawny kod";
-    }
-
-  /*  @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "button_id")
-    private List<Item> itemList;
-
-    public Button() {
-    }
-
-    public Button(List<Item> itemList) {
-        super("Przycisk na ścianie", ItemType.BUTTON);
-        this.itemList = itemList;
-    }
-
-    Boolean checkCode() {
-        int allPartsOfCode = 0;
-        for (Item item : itemList) {
-            if (item instanceof Lamp) {
-                Lamp lamp = (Lamp) item;
-                if (lamp.isCode()) {
-                    allPartsOfCode++;
-                }
-            }
+        if (checkCode()) {
+            context.getRoom().getItemList().add(container);
+            return "Udało się w pokoju pojawia sie nowy przedmiot.";
+        } else {
+            return "Niepoprawny kod";
         }
-        if(allPartsOfCode==itemList.size()){
-           return true;
-        }else{
-            return false;
-        }
+
     }
 
 
-    @Override
-    public String use(Context context) {
-        boolean isCorrectCode;
-        isCorrectCode=checkCode();
-        if(isCorrectCode){
-            return "Udało się";
-        }
-        return "Nie poprawny kod";
-    }*/
 }

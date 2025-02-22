@@ -17,8 +17,6 @@ public class PieceOfPaper extends Item {
 
     @Override
     public String use(Context context) {
-        context.getPlayer().getItemList().add(this);
-        context.getRoom().getItemList().remove(this);
         return "Na kartce papieru widnieje "+message;
     }
 

@@ -1,6 +1,7 @@
 package com.escapeRoom.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
 import lombok.Setter;
 
 
@@ -8,6 +9,7 @@ import lombok.Setter;
 public class Container extends Item {
 
     private boolean isChecked = false;
+    @Getter
     @Setter
     @ManyToOne
     private Item item;
@@ -20,10 +22,6 @@ public class Container extends Item {
         this.item = item;
     }
 
-    public Item getItem() {
-        return item;
-    }
-
     @Override
     public String use(Context context) {
         if (!isChecked && item.getType().equals(ItemType.KEY)) {
@@ -32,7 +30,7 @@ public class Container extends Item {
             return "Wyciagasz " + item.getName() + " z " + getName();
         } else if (!isChecked && !item.getType().equals(ItemType.KEY)) {
             isChecked = true;
-            context.getPlayer().addItem(item);
+            context.getRoom().getItemList().add(item);
             return "Wyciagasz " + item.getName() + " z " + getName();
         } else {
             return "Nic tu nie ma!";

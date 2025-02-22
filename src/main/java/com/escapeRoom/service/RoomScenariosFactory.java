@@ -73,53 +73,41 @@ public class RoomScenariosFactory {
         List<Item> newItems = new ArrayList<>();
         Key key = new Key();
         itemRepository.save(key);
-        PieceOfPaper pieceOfPaper = new PieceOfPaper("Kod z szuflady biórka", "1234");
+        CodeGenerator codeGenerator = new CodeGenerator();//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        String message = String.valueOf(codeGenerator.getCode());
+        PieceOfPaper pieceOfPaper = new PieceOfPaper("Kod z szuflady biórka", message);
         itemRepository.save(pieceOfPaper);
         Container container = new Container(pieceOfPaper, "Szuflada");
         itemRepository.save(container);
-        List<Item> lamps = prepareLampsRiddle(pieceOfPaper.getMessage());
-        for (Item lamp : lamps) {
+        List<Item> items = prepareLampsRiddle(pieceOfPaper.getMessage());
+        for (Item lamp : items) {
             itemRepository.save(lamp);
         }
-        SmallMirror mirror = new SmallMirror("Lusteroko",1234);
+        SmallMirror mirror = new SmallMirror("Lusteroko", pieceOfPaper.getMessage());
         itemRepository.save(mirror);
-        Desk desk = new Desk("Biurko",container, mirror);
-        newItems.addAll(lamps);
+        Desk desk = new Desk(container, mirror);
+        newItems.addAll(items);
         newItems.add(desk);
-        Button button = new Button(lamps);
+        Container containerWithKey = new Container(key, "Skrynia");
+        itemRepository.save(containerWithKey);
+        Button button = new Button(items,containerWithKey);
         newItems.add(button);
         scene.lockRandomDoor(key);
 
         return newItems;
     }
 
-
-
-    /*private List<Item> prepareDesKTop(String code) {
-        List<Item> lamps = new ArrayList<>();
-        int[] codeInTab = new int[4];
-        int name = 0;
-        for (int i = 3; i > -1; i--) {
-            codeInTab[i] = code.charAt(i);
-            name++;
-            Lamp lamp = new Lamp("Lampa nr. " + String.valueOf(name), codeInTab[i]);
-            lamps.add(lamp);
-        }
-        return lamps;
-    }*/
-
     private List<Item> prepareLampsRiddle(String code) {
         List<Item> lamps = new ArrayList<>();
+        String reversedCode = new StringBuilder(code).reverse().toString();
         for (int i = 0; i < code.length(); i++) {
-            int digit = Character.getNumericValue(code.charAt(i)); // Konwersja znaku na liczbę
-            String lampName = "Lampa nr. " + (i + 1); // Numerujemy od 1
+            int digit = Character.getNumericValue(reversedCode.charAt(i));
+            String lampName = "Lampa nr. " + (i + 1);
             Lamp lamp = new Lamp(lampName, digit);
             lamps.add(lamp);
         }
         return lamps;
     }
-
-
 
 
 }

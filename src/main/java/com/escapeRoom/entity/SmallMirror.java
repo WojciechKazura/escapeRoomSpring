@@ -2,38 +2,51 @@ package com.escapeRoom.entity;
 
 import jakarta.persistence.Entity;
 
+import java.util.List;
+
 
 @Entity
 public class SmallMirror extends Item {
 
-    private boolean isDecipher = false;
-    private int code;
+
+    private String code;
 
     public SmallMirror() {
     }
 
-    public SmallMirror(String name, int code) {
+    public SmallMirror(String name, String code) {
         super(name, ItemType.MIRROR);
         this.code = code;
     }
 
     @Override
     public String use(Context context) {
-        String trueCode = "";
-        if (!isDecipher) {
-            for( int i = 0;
-            i < 4;
-            i++){
-                int lastNumber = code % 10;
-                trueCode = trueCode + code;
-            }
-            isDecipher=true;
-            return "Po odczytaniu nowy kod to " + trueCode;
-        }else{
-            return "Już rozszyfrowałeś kod jeśli go nie pamiętasz spójż na ...";
+        List<Item> itemList=context.getRoom().getItemList();
+        boolean hasPieceOfPaper = itemList.stream().anyMatch(item -> item instanceof PieceOfPaper);
+        if (hasPieceOfPaper) {
+            String trueCode = decipherCode(code);
+            return "Prawdziwy kod to" + trueCode;
+        } else{
+            return"Nie masz w pokoju nic co mugłbyś rozszyfrować.";
         }
+    }
 
+    private String decipherCode(String code) {
+        return new StringBuilder(code).reverse().toString();
+    }
+
+    private int safeParse(String code) {
+        try {
+            return Integer.parseInt(code);
+        } catch (NumberFormatException e) {
+            return 0;
+        }
     }
 
 
 }
+
+
+
+
+
