@@ -11,7 +11,7 @@ public class CodeForProtectContainer extends Item {
     private int code;
 
     public CodeForProtectContainer() {
-        super("CODE", ItemType.CODE);
+        super("Kod", ItemType.CODE);
         code = createCode();
     }
 

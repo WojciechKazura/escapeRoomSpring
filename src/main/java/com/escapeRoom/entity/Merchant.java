@@ -3,12 +3,15 @@ package com.escapeRoom.entity;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
+import lombok.Getter;
+
 import java.util.List;
 
 @Entity
 public class Merchant extends Item {
 
 
+    @Getter
     @OneToMany(cascade = CascadeType.ALL)
     private List<Item> itemList;
 
@@ -20,10 +23,6 @@ public class Merchant extends Item {
    public Merchant(List<Item> itemList) {
         super("Merchant",ItemType.MERCHANT);
         this.itemList = itemList;
-    }
-
-    public List<Item> getItemList() {
-        return itemList;
     }
 
     @Override

@@ -25,7 +25,6 @@ public class Player {
         this.id = id;
         this.name = name;
         hp=100;
-
     }
 
     Player() {

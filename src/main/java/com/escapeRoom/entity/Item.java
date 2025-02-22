@@ -14,11 +14,11 @@ public abstract class Item {
     private int id;
     private String name;
     private ItemType type; //todo
-  
+
 
     public Item(String name, ItemType itemType) {
         this.name = name;
-        this.type=itemType;
+        this.type = itemType;
     }
 
     public Item() {
@@ -39,11 +39,13 @@ public abstract class Item {
         return type;
     }
 
+
     @Override
     public String toString() {
         return "Item{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", type=" + type +
                 '}';
     }
 }

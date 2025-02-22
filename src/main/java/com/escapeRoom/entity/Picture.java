@@ -3,8 +3,6 @@ package com.escapeRoom.entity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
 
-import java.util.Random;
-
 @Entity
 public class Picture extends Item {
 
