@@ -28,6 +28,7 @@ public class ProtectContainer extends Item {
         if (!isChecked && context.getPlayer().getItemList().contains(codeForProtectContainer)) {
             isChecked = true;
             context.getPlayer().addItem(item);
+            context.getRoom().getItemList().remove(codeForProtectContainer);
             return "Wyciagasz " + item.getName() + " z " + getName();
         } else if(isChecked) {
             return "Nic tu więcej nie ma.";

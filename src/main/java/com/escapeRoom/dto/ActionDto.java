@@ -4,6 +4,7 @@ public class ActionDto {
 
     private int itemId;
     private int gameId;
+  ;
 
     public ActionDto() {
 
@@ -16,4 +17,7 @@ public class ActionDto {
     public int getGameId() {
         return gameId;
     }
+
+
+
 }

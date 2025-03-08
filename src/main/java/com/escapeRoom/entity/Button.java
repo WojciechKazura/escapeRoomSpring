@@ -33,7 +33,6 @@ public class Button extends Item {
                 .map(item -> (Lamp) item)
                 .filter(Lamp::isCode)
                 .count();
-
         return allPartsOfCode == itemList.stream().filter(item -> item instanceof Lamp).count();
     }
 

@@ -4,6 +4,7 @@ package com.escapeRoom.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
 import java.util.Random;
 
 @Getter
@@ -17,18 +18,20 @@ public class Desk extends Item {
     @ManyToOne
     private Item item;
 
-    boolean isEmptyContainer=false;
+    @Transient
+    boolean isEmptyContainer = false;
 
+    @Transient
     private int fourNumbersCodeForLamps;
 
     public Desk() {
     }
 
-    public Desk(Container container,Item item) {
+    public Desk(Container container, Item item) {
         super("Biurko", ItemType.FURNITURE);
-        this.container=container;
-        this.fourNumbersCodeForLamps=createCode();
-        this.item=item;
+        this.container = container;
+        this.fourNumbersCodeForLamps = createCode();
+        this.item = item;
 
 
     }
@@ -40,13 +43,13 @@ public class Desk extends Item {
 
     @Override
     public String use(Context context) {
-        if(!isEmptyContainer){
-            isEmptyContainer=true;
+        if (!isEmptyContainer) {
+            isEmptyContainer = true;
             context.getRoom().getItemList().add(container);
             context.getRoom().getItemList().add(item);
-            return "Biurko ma ukrytą szuflade!, Na blacie jest przytwierdone małe "+item.getName();
-        }else{
-            return "W szufladzie nic wiecej nie ma na blacie jest "+item.getName() ;
+            return "Biurko ma ukrytą szuflade!, Na blacie jest przytwierdone małe " + item.getName();
+        } else {
+            return "W szufladzie nic wiecej nie ma na blacie jest " + item.getName();
         }
     }
 

@@ -8,6 +8,7 @@ import lombok.Setter;
 @Entity
 public class Container extends Item {
 
+    @Transient
     private boolean isChecked = false;
     @Getter
     @Setter

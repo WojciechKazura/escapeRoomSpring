@@ -1,6 +1,7 @@
 package com.escapeRoom.entity;
 
 import jakarta.persistence.*;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +17,7 @@ public class Game {
     private Player player;
     @OneToOne(cascade = CascadeType.ALL)
     private Scene firstScene;
+    @Setter
     @OneToOne
     private Scene activeScene;
     @Transient
@@ -80,11 +82,9 @@ public class Game {
         return firstScene;
     }
 
+
     public double getChanceForSplit() {
         return chanceForSplit;
     }
 
-    public void setActiveScene(Scene targetScene) {
-        this.activeScene = targetScene;
-    }
 }

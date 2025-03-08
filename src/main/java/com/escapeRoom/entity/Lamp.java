@@ -1,6 +1,7 @@
 package com.escapeRoom.entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.Transient;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,6 +9,7 @@ import lombok.Setter;
 public class Lamp extends Item {
 
     private int valueCode;
+    @Transient
     @Setter
     private int howManyUse;
     private String a;

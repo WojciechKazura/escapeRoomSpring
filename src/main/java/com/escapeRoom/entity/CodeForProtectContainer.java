@@ -1,6 +1,7 @@
 package com.escapeRoom.entity;
 
 import jakarta.persistence.Entity;
+import lombok.Getter;
 
 import java.util.Random;
 
@@ -8,7 +9,10 @@ import java.util.Random;
 public class CodeForProtectContainer extends Item {
 
     private String label = "";
+    @Getter
     private int code;
+
+    private boolean haveCode = false;
 
     public CodeForProtectContainer() {
         super("Kod", ItemType.CODE);
@@ -22,16 +26,13 @@ public class CodeForProtectContainer extends Item {
 
     @Override
     public String use(Context context) {
-        context.getPlayer().getItemList().add(this);
-        return "Znalazłeś kod "+code;
-    }
-
-    public String getLabel() {
-        return label;
-    }
-
-    public int getCode() {
-        return code;
+        if (!haveCode) {
+            context.getPlayer().getItemList().add(this);
+            haveCode=true;
+            return "Znalazłeś kod " + code;
+        }else{
+            return "Masz juz kod " + code;
+        }
     }
 
     public void setLabel(int nr) {
@@ -46,7 +47,9 @@ public class CodeForProtectContainer extends Item {
     @Override
     public String toString() {
         return "CodeForProtectContainer{" +
-                "code=" + code +
+                "label='" + label + '\'' +
+                ", code=" + code +
+                ", haveCode=" + haveCode +
                 '}';
     }
 }

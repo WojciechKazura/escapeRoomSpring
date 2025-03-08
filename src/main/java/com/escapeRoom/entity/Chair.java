@@ -1,11 +1,13 @@
 package com.escapeRoom.entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.Transient;
 
 @Entity
 public class Chair extends Item {
 
-    private boolean haveAdvice=false;
+    @Transient
+    private boolean haveAdvice = false;
 
 
     public Chair() {
