@@ -2,9 +2,9 @@ package com.escapeRoom.dto;
 
 public class WeightForScaleDto {
 
-    private int itemId; // Identyfikator przedmiotu (ciężarka)
-    private int gameId; // Identyfikator gry
-    private String side; // Strona wagi: "left" lub "right"
+    private int itemId;
+    private int gameId;
+    private String side;
 
 
     public int getItemId() {

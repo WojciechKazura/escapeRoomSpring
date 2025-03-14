@@ -2,7 +2,6 @@ package com.escapeRoom.service;
 
 import com.escapeRoom.entity.*;
 import com.escapeRoom.repository.ItemRepository;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -35,7 +34,7 @@ public class RoomScenariosFactory {
                 break;
         }*/
         List<Item> newItems = new ArrayList<>();
-        newItems = createScenario7(scene);
+        newItems = createScenario8(scene);
         scene.addItems(newItems);
     }
 
@@ -137,7 +136,6 @@ public class RoomScenariosFactory {
 
         newItems.add(furnitureForBooks);
         scene.lockRandomDoor(key);
-
         return newItems;
     }
 
@@ -146,9 +144,20 @@ public class RoomScenariosFactory {
         Key key = new Key();
         itemRepository.save(key);
 
+        RightSideWeightMechanism rightSideWeightMechanism = new RightSideWeightMechanism(0);
+        itemRepository.save(rightSideWeightMechanism);
+        newItems.add(rightSideWeightMechanism);
+
+        LeftSideWeightMechanism leftSideWeightMechanism = new LeftSideWeightMechanism(0);
+        itemRepository.save(leftSideWeightMechanism);
+        newItems.add(leftSideWeightMechanism);
+
+        Figurine figurine = new Figurine();
+        itemRepository.save(figurine);
         List<WeightForScale> weightForScales = prepareWeightMechanismRiddle();
 
-        WeightMechanism weightMechanism = new WeightMechanism(key, weightForScales);
+        WeightMechanism weightMechanism = new WeightMechanism(key, weightForScales, rightSideWeightMechanism, leftSideWeightMechanism
+                , figurine);
         itemRepository.save(weightMechanism);
 
         for (WeightForScale item : weightForScales) {
@@ -157,6 +166,7 @@ public class RoomScenariosFactory {
         }
 
         newItems.add(weightMechanism);
+        scene.lockRandomDoor(key);
         return newItems;
     }
 
@@ -218,12 +228,24 @@ public class RoomScenariosFactory {
 
         CodeForProtectContainer code = new CodeForProtectContainer();
         itemRepository.save(code);
+/////////////////////////////////////
+        List<Item> itemList = preparePicturesRiddle();
 
-        Picture picture = new Picture(code);
-        itemRepository.save(picture);
+        Gallery gallery = new Gallery(itemList,code);
+        itemRepository.save(gallery);
+
+        for (Item i : itemList) {
+            if (i instanceof Photo) {
+                Photo photo = (Photo) i;
+                photo.setGallery(gallery);
+                itemRepository.save(photo);
+            }
+        }
 
         ProtectContainer protectContainer = new ProtectContainer("Skrzynka na kod.", key, code);
         itemRepository.save(protectContainer);
+
+        newItems.add(gallery);
 
         newItems.add(protectContainer);
 
@@ -290,14 +312,15 @@ public class RoomScenariosFactory {
         return fuseList;
     }
 
-    private List<Item> preparePictureRiddle(Picture truPicture) {
-        List<Item> picturesList = new ArrayList<>();
-        for (int i = 0; i < 3; i++) {
-            Picture picture = new Picture(new CodeForProtectContainer());
-            picturesList.add(picture);
+    private List<Item> preparePicturesRiddle() {
+        List<Item> photoList = new ArrayList<>();
+        for (int i = 0; i < 4; i++) {
+            CodeForProtectContainer falseCode = new CodeForProtectContainer();
+            itemRepository.save(falseCode);
+            Photo falsePhoto = new Photo(falseCode);
+            photoList.add(falsePhoto);
         }
-        picturesList.add(truPicture);
-        return picturesList;
+        return photoList;
     }
 
 }

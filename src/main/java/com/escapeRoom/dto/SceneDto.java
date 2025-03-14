@@ -1,7 +1,5 @@
 package com.escapeRoom.dto;
 
-import com.escapeRoom.entity.Item;
-
 
 import java.util.List;
 

@@ -24,7 +24,7 @@ public class BlackWall extends Item {
     }
 
     public BlackWall(CodeForProtectContainer code, List<Item> itemList, FlashLight flashLight) {
-        super("Czarna ścian", ItemType.BLACKWALL);
+        super("Czarna ściana", ItemType.BLACKWALL);
         this.codeForProtectContainer = code;
         this.itemList = itemList;
         this.flashLight = flashLight;
