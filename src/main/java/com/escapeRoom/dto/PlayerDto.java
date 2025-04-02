@@ -14,7 +14,7 @@ public class PlayerDto {
 
     private List<ItemDto> itemList;
 
-    PlayerDto() {
+    public PlayerDto() {
 
     }
 
@@ -39,6 +39,22 @@ public class PlayerDto {
 
     public int getHowManyCoins() {
         return howManyCoins;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setHowManyCoins(int howManyCoins) {
+        this.howManyCoins = howManyCoins;
+    }
+
+    public void setItemList(List<ItemDto> itemList) {
+        this.itemList = itemList;
     }
 
     @Override

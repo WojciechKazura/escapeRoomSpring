@@ -72,15 +72,6 @@ public class GameService {
         return action;
     }
 
-   /* public ActionResultDto doActionForWeightForScale(WeightForScaleDto weightForScaleDto){
-        Game game = gameRepository.findById(weightForScaleDto.getGameId()).orElseThrow();
-        Context context = new Context(game);
-        Item item = findItem(weightForScaleDto.getItemId());
-        ActionResultDto action = new ActionResultDto(item.use(context),weightForScaleDto.getSide());
-        gameRepository.save(game);
-        return action;
-    }*/
-
     public ItemDto getItem(Integer id) {
         return mapToItemDto(itemRepository.findById(id).orElseThrow());
     }

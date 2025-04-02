@@ -18,6 +18,19 @@ public class ActionDto {
         return gameId;
     }
 
+    public void setItemId(int itemId) {
+        this.itemId = itemId;
+    }
 
+    public void setGameId(int gameId) {
+        this.gameId = gameId;
+    }
 
+    @Override
+    public String toString() {
+        return "ActionDto{" +
+                "itemId=" + itemId +
+                ", gameId=" + gameId +
+                '}';
+    }
 }

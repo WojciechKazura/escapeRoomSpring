@@ -1,5 +1,8 @@
 package com.escapeRoom.dto;
 
+import lombok.Data;
+
+@Data
 public class AccountDto {
 // tu jet playre id do wrappera
     private Integer id; //wrapper
@@ -7,9 +10,10 @@ public class AccountDto {
     private String password;
     private Integer gameId;
 
-    AccountDto(){
+    public AccountDto(){
 
     }
+
     public AccountDto(Integer id, String email, String password, Integer gameId) {
         this.id = id;
         this.email = email;

@@ -21,8 +21,6 @@ public class ItemDto {
 
     }
 
-
-
     public ItemType getItemType() {
         return itemType;
     }

@@ -14,6 +14,10 @@ public class SceneDto {
 
     private List<ItemDto> itemList;
 
+   public SceneDto() {
+
+    }
+
 
     public SceneDto(int id, String name, String image, List<ItemDto> itemList) {//wrapper
         this.id = id;
@@ -24,10 +28,6 @@ public class SceneDto {
 
     public SceneDto(int id){
         this.id=id;
-    }
-
-    SceneDto() {
-
     }
 
     public int getId() {//wrapper

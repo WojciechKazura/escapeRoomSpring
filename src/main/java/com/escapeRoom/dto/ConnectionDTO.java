@@ -31,10 +31,4 @@ public class ConnectionDTO {
         return List.of(from,to);
     }
 
-
-
-
-
-
-
 }
