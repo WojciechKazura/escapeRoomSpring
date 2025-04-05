@@ -2,8 +2,8 @@ package com.escapeRoom.entity;
 
 
 public class Context {
-    private Game game;
 
+    private Game game;
 
     public Context(Game game) {
         this.game = game;

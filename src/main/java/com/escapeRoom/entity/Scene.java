@@ -62,6 +62,14 @@ public class Scene {
         return nextScenes;
     }
 
+    public Game getGame() {
+        return game;
+    }
+
+    public void setGame(Game game) {
+        this.game = game;
+    }
+
     public void lockRandomDoor(Key key) {
         Collections.shuffle(itemList);
         for (Item item : itemList) {

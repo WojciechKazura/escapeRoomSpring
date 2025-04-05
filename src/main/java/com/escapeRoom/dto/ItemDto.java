@@ -11,14 +11,14 @@ public class ItemDto {
     private String name;
     private ItemType itemType;
 
+    public ItemDto() {
+
+    }
+
     public ItemDto( int id, String name, ItemType itemType) {
         this.id = id;
         this.name = name;
         this.itemType = itemType;
-    }
-
-    public ItemDto() {
-
     }
 
     public ItemType getItemType() {

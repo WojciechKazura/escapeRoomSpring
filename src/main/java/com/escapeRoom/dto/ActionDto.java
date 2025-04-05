@@ -4,7 +4,6 @@ public class ActionDto {
 
     private int itemId;
     private int gameId;
-  ;
 
     public ActionDto() {
 

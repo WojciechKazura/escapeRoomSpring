@@ -80,7 +80,7 @@ public class GameService {
         return mapToDTO(gameRepository.findById(id).orElseThrow());
     }
 
-    private Item mapToItem(ItemDto itemDto) {
+    private Item mapToItem(ItemDto itemDto) {//bład z testów ToDo!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         return switch (itemDto.getItemType()) {
             case WINDOW -> new Window();
             default -> throw new IllegalStateException("Nieprawidłowy typ");

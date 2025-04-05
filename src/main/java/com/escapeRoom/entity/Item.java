@@ -39,6 +39,17 @@ public abstract class Item {
         return type;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setType(ItemType type) {
+        this.type = type;
+    }
 
     @Override
     public String toString() {
