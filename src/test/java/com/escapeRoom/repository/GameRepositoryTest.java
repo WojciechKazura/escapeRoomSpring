@@ -11,7 +11,7 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
-@ActiveProfiles("test")  // jeśli masz application-test.properties
+@ActiveProfiles("test")
 public class GameRepositoryTest {
 
     @Autowired
@@ -19,24 +19,18 @@ public class GameRepositoryTest {
 
     @Test
     void shouldSaveAndFindGameById() {
-        // given
         Game game = new Game();  // ustaw pola, jeśli trzeba
         Game savedGame = gameRepository.save(game);
 
-        // when
         Optional<Game> foundGame = gameRepository.findById(savedGame.getId());
 
-        // then
         assertTrue(foundGame.isPresent());
         assertEquals(savedGame.getId(), foundGame.get().getId());
     }
 
     @Test
     void shouldReturnEmptyWhenGameNotFound() {
-        // when
         Optional<Game> game = gameRepository.findById(999);
-
-        // then
         assertTrue(game.isEmpty());
     }
 }

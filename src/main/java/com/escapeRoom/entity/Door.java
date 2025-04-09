@@ -13,6 +13,7 @@ public class Door extends Item {
     private Scene targetScene;
 
     public Door() {
+        super("Door", ItemType.DOOR);
     }
 
     public Door(Scene scene) {
@@ -23,6 +24,14 @@ public class Door extends Item {
     public Door(Key key) {
         super("Door", ItemType.DOOR);
         this.key = key;
+    }
+
+    public boolean isOpen() {
+        return open;
+    }
+
+    public void setTargetScene(Scene targetScene) {
+        this.targetScene = targetScene;
     }
 
     @Override
@@ -43,6 +52,7 @@ public class Door extends Item {
             return "Dzwi zamknięte brak klucza.";
         }
     }
+
     @Override
     public String getName(){
         String closeLabel = "";
@@ -57,4 +67,6 @@ public class Door extends Item {
         key.setLabel(targetScene.getId());
         open = false;
     }
+
+
 }

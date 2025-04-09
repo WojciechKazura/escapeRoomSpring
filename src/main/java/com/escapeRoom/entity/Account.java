@@ -7,7 +7,7 @@ public class Account {
     @Id
     @GeneratedValue
     private int id; //wrapper
-    private String email;
+    private String login;
     private String password;
     @OneToOne(cascade = CascadeType.ALL)
     private Game game;
@@ -16,8 +16,8 @@ public class Account {
 
     }
 
-    public Account(String email, String password, Game game) {
-        this.email = email;
+    public Account(String login, String password, Game game) {
+        this.login = login;
         this.password = password;
         this.game = game;
     }
@@ -26,8 +26,8 @@ public class Account {
         return id;
     }
 
-    public String getEmail() {
-        return email;
+    public String getLogin() {
+        return login;
     }
 
     public String getPassword() {

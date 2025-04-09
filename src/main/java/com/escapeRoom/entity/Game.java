@@ -30,14 +30,13 @@ public class Game {
         createMap(firstScene);
     }
 
-
-
     public void createMap(Scene scene){
         List<Scene> roomList= createConnections();
         scene.setNextScenes(roomList);
         for(Scene next : roomList){
             createMap(next);
         }
+        chanceForSplit *= 0.9;//zniejszenie po utworzeniu mapy
     }
 
     public List<Scene> createConnections() {
@@ -82,6 +81,13 @@ public class Game {
         return firstScene;
     }
 
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+
+    public void setChanceForSplit(double chanceForSplit) {
+        this.chanceForSplit = chanceForSplit;
+    }
 
     public double getChanceForSplit() {
         return chanceForSplit;

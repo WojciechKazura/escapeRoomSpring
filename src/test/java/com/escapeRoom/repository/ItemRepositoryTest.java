@@ -20,31 +20,22 @@ public class ItemRepositoryTest {
 
     @Test
     void shouldSaveAndFindItemById() {
-        // given
-        Item window = new Window(); // lub: new Item(); jeśli Item nie jest abstrakcyjne
+        Item window = new Window();
         window.setName("Test Window");
-
-        // when
         Item saved = itemRepository.save(window);
         Optional<Item> found = itemRepository.findById(saved.getId());
-
-        // then
         assertTrue(found.isPresent());
         assertEquals("Test Window", found.get().getName());
     }
 
     @Test
     void shouldReturnEmptyWhenItemNotFound() {
-        // when
         Optional<Item> item = itemRepository.findById(999);
-
-        // then
         assertTrue(item.isEmpty());
     }
 
     @Test
     void shouldFindAllItems() {
-        // given
         Item item1 = new Window();
         item1.setName("Item1");
 
@@ -54,10 +45,7 @@ public class ItemRepositoryTest {
         itemRepository.save(item1);
         itemRepository.save(item2);
 
-        // when
         var allItems = itemRepository.findAll();
-
-        // then
         assertEquals(2, allItems.size());
     }
 }

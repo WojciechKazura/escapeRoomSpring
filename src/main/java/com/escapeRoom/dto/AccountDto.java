@@ -6,7 +6,7 @@ import lombok.Data;
 public class AccountDto {
 // tu jet playre id do wrappera
     private Integer id; //wrapper
-    private String email;
+    private String login;
     private String password;
     private Integer gameId;
 
@@ -14,9 +14,9 @@ public class AccountDto {
 
     }
 
-    public AccountDto(Integer id, String email, String password, Integer gameId) {
+    public AccountDto(Integer id, String login, String password, Integer gameId) {
         this.id = id;
-        this.email = email;
+        this.login = login;
         this.password = password;
         this.gameId = gameId;
 
@@ -26,8 +26,8 @@ public class AccountDto {
         return id;
     }
 
-    public String getEmail() {
-        return email;
+    public String getLogin() {
+        return login;
     }
 
     public String getPassword() {
@@ -42,7 +42,7 @@ public class AccountDto {
     public String toString() {
         return "AccountDto{" +
                 "id=" + id +
-                ", email='" + email + '\'' +
+                ", email='" + login + '\'' +
                 ", password='" + password + '\'' +
                 ", gameId=" + gameId +
                 '}';

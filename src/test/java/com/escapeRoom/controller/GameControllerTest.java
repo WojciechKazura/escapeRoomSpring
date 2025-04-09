@@ -16,18 +16,17 @@ import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@WebMvcTest(GameController.class)  // Używamy WebMvcTest do testowania kontrolera
+@WebMvcTest(GameController.class)
 public class GameControllerTest {
 
     @Autowired
-    private MockMvc mockMvc;  // MockMvc jest wstrzykiwane przez Spring
+    private MockMvc mockMvc;
 
     @MockBean
-    private GameService gameService;  // Używamy @MockBean zamiast @Mock
+    private GameService gameService;
 
     @BeforeEach
     void setup() {
-        // Przygotowanie danych wejściowych i wyników przed każdym testem
         SceneDto sceneDto = new SceneDto(1, "Active Scene", "image.png", List.of());
         when(gameService.getItemsByActiveScene(1)).thenReturn(sceneDto);
     }
@@ -81,20 +80,16 @@ public class GameControllerTest {
 
     @Test
     void testPlayerDto() throws Exception {
-        // Przygotowanie danych wejściowych i wyników
         PlayerDto playerDto = new PlayerDto();
         playerDto.setId(1);
         playerDto.setName("Test Player");
 
-        // Mockowanie metody gameService.findPlayerByGameID
         when(gameService.findPlayerByGameID(1)).thenReturn(playerDto);
 
-        // Testowanie endpointu
         mockMvc.perform(get("/api/v1/games/1/player"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name").value("Test Player"));
 
-        // Weryfikacja wywołania metody
         verify(gameService, times(1)).findPlayerByGameID(1);
     }
 }

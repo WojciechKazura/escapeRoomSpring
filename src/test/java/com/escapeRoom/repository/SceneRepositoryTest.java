@@ -21,12 +21,11 @@ public class SceneRepositoryTest {
     private GameRepository gameRepository;
 
     @Autowired
-    private ItemRepository itemRepository;  // Jeżeli testujesz powiązanie z przedmiotami
+    private ItemRepository itemRepository;
 
 
     @Test
     void shouldSetNextScenesCorrectly() {
-        // Given
         Game game = new Game();
         game = gameRepository.save(game);  // Zapisujemy grę w bazie
 
@@ -38,14 +37,12 @@ public class SceneRepositoryTest {
         sceneRepository.save(scene1);
         sceneRepository.save(scene2);
 
-        // When
         List<Scene> nextScenes = new ArrayList<>();
         nextScenes.add(scene2);  // Dodajemy scenę jako następna
         scene1.setNextScenes(nextScenes);  // Ustawiamy powiązanie między scenami
 
         sceneRepository.save(scene1);  // Zapisujemy zaktualizowaną scenę
 
-        // Then
         assertEquals(1, scene1.getNextScenes().size());  // Powinna być jedna scena w nextScenes
         assertEquals(scene2.getId(), scene1.getNextScenes().get(0).getId());  // Powinna to być scena 2
     }
