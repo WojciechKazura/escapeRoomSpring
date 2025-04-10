@@ -42,7 +42,7 @@ public class AccountDto {
     public String toString() {
         return "AccountDto{" +
                 "id=" + id +
-                ", email='" + login + '\'' +
+                ", login='" + login + '\'' +
                 ", password='" + password + '\'' +
                 ", gameId=" + gameId +
                 '}';

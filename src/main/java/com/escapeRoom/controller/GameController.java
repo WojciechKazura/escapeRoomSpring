@@ -8,7 +8,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/games")
-@CrossOrigin()
+//@CrossOrigin(origins = "null")
 public class GameController {
 
     private GameService gameService;
@@ -19,6 +19,7 @@ public class GameController {
 
     @GetMapping("{id}/active-scene")
     SceneDto getActiveScene(@PathVariable int id) {
+        System.out.println("returning active scene " + id);
         return gameService.getItemsByActiveScene(id);
     }
 

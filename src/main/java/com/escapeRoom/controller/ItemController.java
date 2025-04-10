@@ -9,7 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/home")//("api/v1/items")
-@CrossOrigin()
+//@CrossOrigin()
 public class ItemController {
 
     private GameService gameService;

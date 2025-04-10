@@ -3,12 +3,10 @@ package com.escapeRoom.configuration;
 import com.escapeRoom.service.AccountService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
@@ -25,18 +23,20 @@ public class SecurityConfig {
 
     @Bean
     SecurityFilterChain configureSecurity(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.csrf(customizer -> customizer.disable());
-        httpSecurity.headers(customizer -> customizer.disable());
-        httpSecurity.authorizeHttpRequests(auth ->
+        return httpSecurity.csrf(customizer -> customizer.disable())
+                .headers(customizer -> customizer.disable())
+                .cors(Customizer.withDefaults())
+                .authorizeHttpRequests(auth ->
                         auth
 
-                        //requestMatchers(AntPathRequestMatcher)
+                                //requestMatchers(AntPathRequestMatcher)
+//                                .requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.OPTIONS, "/api/v1/auth")).permitAll()
                                 .requestMatchers(AntPathRequestMatcher.antMatcher("/api/v1/auth")).permitAll()
-                                .anyRequest().authenticated()
+                                .anyRequest().authenticated()//permitALL
                 )
-                .httpBasic(Customizer.withDefaults());
-        httpSecurity.userDetailsService(accountService);
-        return httpSecurity.build();
+                .httpBasic(Customizer.withDefaults())
+                .userDetailsService(accountService)
+                .build();
     }
 
  /*   @Bean

@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("api/v1/auth")
-@CrossOrigin()
+//@CrossOrigin()
 public class AccountController {
 
     private AccountService accountService;
@@ -16,6 +16,7 @@ public class AccountController {
 
     @PostMapping
     public AccountDto createAccount(@RequestBody AccountDto accountDto){
+        System.out.println("creating account " + accountDto);
         return accountService.createAccount(accountDto);
     }
 
