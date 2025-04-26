@@ -8,7 +8,7 @@ import java.util.*;
 
 @Service
 public class RoomScenariosFactory {
-    private static final int SCENARIOS_COUNT = 5;
+    private static final int SCENARIOS_COUNT = 8;
     private ItemRepository itemRepository;
 
     public RoomScenariosFactory(ItemRepository itemRepository) {
@@ -16,9 +16,9 @@ public class RoomScenariosFactory {
     }
 
     public void addRandomScenario(Scene scene) {
-        /*Random random = new Random();
+        Random random = new Random();
         int randomScenario = random.nextInt(SCENARIOS_COUNT) + 1;
-        List<Item> newItems = new ArrayList<>();
+       List<Item> newItems = new ArrayList<>();
         switch (randomScenario) {
             case 1:
                 newItems = createScenario1(scene);
@@ -32,9 +32,18 @@ public class RoomScenariosFactory {
             case 4:
                 newItems = createScenario4(scene);
                 break;
-        }*/
-        List<Item> newItems = new ArrayList<>();
-        newItems = createScenario7(scene);
+            case 5:
+                newItems = createScenario5(scene);
+                break;
+            case 6:
+                newItems = createScenario6(scene);
+                break;
+            case 7:
+                newItems = createScenario7(scene);
+                break;
+        }
+        //List<Item> newItems = new ArrayList<>();// dla testów scenaiuszy
+        // newItems = createScenario7(scene);
         scene.addItems(newItems);
     }
 
@@ -73,7 +82,7 @@ public class RoomScenariosFactory {
         Key key = new Key();
         itemRepository.save(key);
 
-        CodeGenerator codeGenerator = new CodeGenerator();//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        CodeGenerator codeGenerator = new CodeGenerator();
         String message = String.valueOf(codeGenerator.getCode());
         PieceOfPaper pieceOfPaper = new PieceOfPaper("Kod z szuflady biórka", message);
         itemRepository.save(pieceOfPaper);
@@ -202,32 +211,6 @@ public class RoomScenariosFactory {
             newItems.add(item);
         }
         newItems.add(blackWall);
-        return newItems;
-    }
-
-    private List<Item> createScenario8(Scene scene) {
-        List<Item> newItems = new ArrayList<>();
-        Key key = new Key();
-        itemRepository.save(key);
-
-        FirstAidKit firstAidKit = new FirstAidKit();
-        itemRepository.save(firstAidKit);
-
-        newItems.add(new Container(firstAidKit, "Skrzynka z pateczką."));
-
-        CodeForProtectContainer code = new CodeForProtectContainer();
-        itemRepository.save(code);
-
-        Picture picture = new Picture(code);
-        itemRepository.save(picture);
-
-        ProtectContainer protectContainer = new ProtectContainer("Skrzynka na kod.", key, code);
-        itemRepository.save(protectContainer);
-
-        newItems.add(protectContainer);
-
-        scene.lockRandomDoor(key);
-
         return newItems;
     }
 

@@ -27,7 +27,7 @@ public class SceneRepositoryTest {
     @Test
     void shouldSetNextScenesCorrectly() {
         Game game = new Game();
-        game = gameRepository.save(game);  // Zapisujemy grę w bazie
+        game = gameRepository.save(game);
 
         Scene scene1 = new Scene("Scene 1", "image1.png", new ArrayList<>());
         Scene scene2 = new Scene("Scene 2", "image2.png", new ArrayList<>());
@@ -38,12 +38,12 @@ public class SceneRepositoryTest {
         sceneRepository.save(scene2);
 
         List<Scene> nextScenes = new ArrayList<>();
-        nextScenes.add(scene2);  // Dodajemy scenę jako następna
-        scene1.setNextScenes(nextScenes);  // Ustawiamy powiązanie między scenami
+        nextScenes.add(scene2);
+        scene1.setNextScenes(nextScenes);
 
-        sceneRepository.save(scene1);  // Zapisujemy zaktualizowaną scenę
+        sceneRepository.save(scene1);
 
-        assertEquals(1, scene1.getNextScenes().size());  // Powinna być jedna scena w nextScenes
-        assertEquals(scene2.getId(), scene1.getNextScenes().get(0).getId());  // Powinna to być scena 2
+        assertEquals(1, scene1.getNextScenes().size());
+        assertEquals(scene2.getId(), scene1.getNextScenes().get(0).getId());
     }
 }

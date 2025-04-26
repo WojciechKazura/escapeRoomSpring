@@ -8,8 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/home")//("api/v1/items")
-//@CrossOrigin()
+@RequestMapping("/home")
 public class ItemController {
 
     private GameService gameService;
@@ -25,7 +24,6 @@ public class ItemController {
     }
 
     @GetMapping("/{id}")
-//todo zabezpieczyc przed wyjątkiem gdy mamy złe id
     ItemDto getItem(@PathVariable Integer id) {
         return gameService.getItem(id);
     }

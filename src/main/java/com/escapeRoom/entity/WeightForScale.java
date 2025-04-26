@@ -32,46 +32,15 @@ public class WeightForScale extends Item {
 
     public String use(Context context, String side) {
         String result = "Ciężarek umieszczony na " + side + " stronie wagi.";
-
-        // Możesz dodać dodatkową logikę, jeżeli chcesz wykonać jakąś akcję związaną z umieszczaniem na wadze
         if ("left".equalsIgnoreCase(side)) {
             use(context);
-           return "llllllllllllllll";
+            return "llllllllllllllll";
         } else if ("right".equalsIgnoreCase(side)) {
-         return "ppppppppppppppppppppp";
+            return "ppppppppppppppppppppp";
         }
 
         return result;
     }
 
-
-
-  /* @Getter
-    @Setter
-    @ManyToOne
-    @JoinColumn(name = "weight_for_scale_id")
-    private WeightMechanism weightMechanism;
-
-
-    private int weight;
-
-    public WeightForScale(int weight) {
-        super("Ciężarek", ItemType.WEIGHTFORSCALE);
-        this.weight = weight;
-    }
-
-    public WeightForScale() {
-    }
-
-    @Override
-    public String use(Context context) {
-
-        return "";
-    }
-
-    public String use(Context context, String side) {
-        String s=side;
-        return "aaaa";
-    }*/
 }
 

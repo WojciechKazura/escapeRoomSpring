@@ -13,7 +13,7 @@ public abstract class Item {
     @GeneratedValue
     private int id;
     private String name;
-    private ItemType type; //todo
+    private ItemType type;
 
 
     public Item(String name, ItemType itemType) {

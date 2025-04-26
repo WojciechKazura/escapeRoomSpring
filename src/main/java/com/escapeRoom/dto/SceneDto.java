@@ -1,20 +1,18 @@
 package com.escapeRoom.dto;
 
-import com.escapeRoom.entity.Item;
-
 
 import java.util.List;
 
 public class SceneDto {
 
 
-    private int id; //wraper
+    private int id;
     private String name;
     private String image;
 
     private List<ItemDto> itemList;
 
-   public SceneDto() {
+    public SceneDto() {
 
     }
 
@@ -26,8 +24,8 @@ public class SceneDto {
         this.itemList = itemList;
     }
 
-    public SceneDto(int id){
-        this.id=id;
+    public SceneDto(int id) {
+        this.id = id;
     }
 
     public int getId() {//wrapper

@@ -33,48 +33,40 @@ public class GameControllerTest {
 
     @Test
     void testGetActiveScene() throws Exception {
-        // Testowanie endpointu, który zwraca scenę
         mockMvc.perform(get("/api/v1/games/1/active-scene"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name").value("Active Scene"));  // Zakładając, że w odpowiedzi zwracasz nazwę sceny
 
-        // Weryfikacja, czy metoda została wywołana
+
         verify(gameService, times(1)).getItemsByActiveScene(1);
     }
 
     @Test
     void testGetConnections() throws Exception {
-        // Przygotowanie danych wejściowych i wyników
         List<ConnectionDTO> connections = List.of(new ConnectionDTO(1, 2));
 
-        // Mockowanie metody gameService.getConnections
         when(gameService.getConnections(1)).thenReturn(connections);
 
-        // Testowanie endpointu
+
         mockMvc.perform(get("/api/v1/games/1/connections"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].source").value(1))
                 .andExpect(jsonPath("$[0].destination").value(2));
 
-        // Weryfikacja wywołania metody
         verify(gameService, times(1)).getConnections(1);
     }
 
     @Test
     void testGetGame() throws Exception {
-        // Przygotowanie danych wejściowych i wyników
         GameDto gameDto = new GameDto();
         gameDto.setId(1);
 
-        // Mockowanie metody gameService.getGameDto
         when(gameService.getGameDto(1)).thenReturn(gameDto);
 
-        // Testowanie endpointu
         mockMvc.perform(get("/api/v1/games/1"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(1));
 
-        // Weryfikacja wywołania metody
         verify(gameService, times(1)).getGameDto(1);
     }
 

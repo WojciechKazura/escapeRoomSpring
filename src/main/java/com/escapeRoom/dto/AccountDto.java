@@ -1,13 +1,17 @@
 package com.escapeRoom.dto;
 
 import lombok.Data;
+import lombok.Getter;
 
 @Data
 public class AccountDto {
-// tu jet playre id do wrappera
-    private Integer id; //wrapper
+    @Getter
+    private Integer id;
+    @Getter
     private String login;
+    @Getter
     private String password;
+    @Getter
     private Integer gameId;
 
     public AccountDto(){
@@ -20,22 +24,6 @@ public class AccountDto {
         this.password = password;
         this.gameId = gameId;
 
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public Integer getGameId() {
-        return gameId;
     }
 
     @Override

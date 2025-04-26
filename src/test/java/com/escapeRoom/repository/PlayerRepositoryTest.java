@@ -19,17 +19,16 @@ public class PlayerRepositoryTest {
     void shouldSaveAndFindPlayerById() {
         Player player = new Player(1, "aa");
 
-        Player savedPlayer = playerRepository.save(player);  // Zapisz gracza
-        Optional<Player> foundPlayer = playerRepository.findById(savedPlayer.getId());  // Pobierz po id
-
-        assertTrue(foundPlayer.isPresent());  // Upewnij się, że gracz został znaleziony
-        assertEquals("aa", foundPlayer.get().getName());  // Sprawdź nazwisko
+        Player savedPlayer = playerRepository.save(player);
+        Optional<Player> foundPlayer = playerRepository.findById(savedPlayer.getId());
+        assertTrue(foundPlayer.isPresent());
+        assertEquals("aa", foundPlayer.get().getName());
     }
 
     @Test
     void shouldReturnEmptyWhenPlayerNotFound() {
-        Optional<Player> player = playerRepository.findById(999);  // Szukaj nieistniejącego gracza
+        Optional<Player> player = playerRepository.findById(999);
 
-        assertTrue(player.isEmpty());  // Oczekuj pustego Optional
+        assertTrue(player.isEmpty());
     }
 }

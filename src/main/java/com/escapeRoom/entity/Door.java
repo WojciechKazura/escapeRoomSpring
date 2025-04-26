@@ -2,13 +2,17 @@ package com.escapeRoom.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 public class Door extends Item {
 
+    @Getter
     private boolean open = true;
     @ManyToOne
     private Key key;
+    @Setter
     @ManyToOne
     private Scene targetScene;
 
@@ -24,14 +28,6 @@ public class Door extends Item {
     public Door(Key key) {
         super("Door", ItemType.DOOR);
         this.key = key;
-    }
-
-    public boolean isOpen() {
-        return open;
-    }
-
-    public void setTargetScene(Scene targetScene) {
-        this.targetScene = targetScene;
     }
 
     @Override

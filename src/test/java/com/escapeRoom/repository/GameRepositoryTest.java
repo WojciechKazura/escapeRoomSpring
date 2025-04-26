@@ -19,7 +19,7 @@ public class GameRepositoryTest {
 
     @Test
     void shouldSaveAndFindGameById() {
-        Game game = new Game();  // ustaw pola, jeśli trzeba
+        Game game = new Game();
         Game savedGame = gameRepository.save(game);
 
         Optional<Game> foundGame = gameRepository.findById(savedGame.getId());

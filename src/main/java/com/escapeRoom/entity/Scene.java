@@ -2,6 +2,8 @@ package com.escapeRoom.entity;
 
 import com.escapeRoom.dto.ConnectionDTO;
 import jakarta.persistence.*;
+import lombok.Setter;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -19,6 +21,7 @@ public class Scene {
     private Key key;
     @OneToMany(cascade = CascadeType.ALL)
     private List<Item> itemList = new ArrayList<>();
+    @Setter
     @ManyToOne
     private Game game;
 
@@ -64,10 +67,6 @@ public class Scene {
 
     public Game getGame() {
         return game;
-    }
-
-    public void setGame(Game game) {
-        this.game = game;
     }
 
     public void lockRandomDoor(Key key) {

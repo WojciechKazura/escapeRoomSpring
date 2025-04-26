@@ -2,10 +2,9 @@ package com.escapeRoom.entity;
 
 import jakarta.persistence.Entity;
 
-import java.util.Random;
 
 @Entity
-public class Figurine extends Item{
+public class Figurine extends Item {
 
     private int weight;
 
@@ -14,7 +13,7 @@ public class Figurine extends Item{
 
     public Figurine(int weight) {
         super("Figurka", ItemType.FIGURINE);
-        this.weight=weight;
+        this.weight = weight;
     }
 
     public int getWeight() {

@@ -13,6 +13,7 @@ public class Game {
     @Id
     @GeneratedValue
     private int id;
+    @Setter
     @OneToOne(cascade = CascadeType.ALL)
     private Player player;
     @OneToOne(cascade = CascadeType.ALL)
@@ -20,6 +21,7 @@ public class Game {
     @Setter
     @OneToOne
     private Scene activeScene;
+    @Setter
     @Transient
     private double chanceForSplit= 1.0;
 
@@ -36,7 +38,7 @@ public class Game {
         for(Scene next : roomList){
             createMap(next);
         }
-        chanceForSplit *= 0.9;//zniejszenie po utworzeniu mapy
+        chanceForSplit *= 0.9;
     }
 
     public List<Scene> createConnections() {
@@ -79,14 +81,6 @@ public class Game {
 
     public Scene getFirstScene() {
         return firstScene;
-    }
-
-    public void setPlayer(Player player) {
-        this.player = player;
-    }
-
-    public void setChanceForSplit(double chanceForSplit) {
-        this.chanceForSplit = chanceForSplit;
     }
 
     public double getChanceForSplit() {

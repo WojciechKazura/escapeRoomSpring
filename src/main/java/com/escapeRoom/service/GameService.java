@@ -62,7 +62,6 @@ public class GameService {
         return sceneDtoList;
     }
 
-    // @Transactional
     public ActionResultDto doAction(ActionDto actionDto) {
         Game game = gameRepository.findById(actionDto.getGameId()).orElseThrow();
         Context context = new Context(game);
@@ -80,7 +79,7 @@ public class GameService {
         return mapToDTO(gameRepository.findById(id).orElseThrow());
     }
 
-    private Item mapToItem(ItemDto itemDto) {//bład z testów ToDo!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    private Item mapToItem(ItemDto itemDto) {
         return switch (itemDto.getItemType()) {
             case WINDOW -> new Window();
             default -> throw new IllegalStateException("Nieprawidłowy typ");

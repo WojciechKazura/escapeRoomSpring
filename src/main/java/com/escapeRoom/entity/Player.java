@@ -1,6 +1,7 @@
 package com.escapeRoom.entity;
 
 import jakarta.persistence.*;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,8 +15,10 @@ public class Player {
     private Integer id; //wrapper
     private String name;
 
+    @Setter
     private int hp;
 
+    @Setter
     private int howManyCoins = 0;
 
     @OneToMany(cascade = CascadeType.ALL)
@@ -72,11 +75,4 @@ public class Player {
         return howManyCoins;
     }
 
-    public void setHowManyCoins(int howManyCoins) {
-        this.howManyCoins = howManyCoins;
-    }
-
-    public void setHp(int hp) {
-        this.hp = hp;
-    }
 }

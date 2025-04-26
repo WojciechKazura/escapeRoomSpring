@@ -3,7 +3,6 @@ package com.escapeRoom.configuration;
 import com.escapeRoom.service.AccountService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -28,10 +27,8 @@ public class SecurityConfig {
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(auth ->
                         auth
-
-                                //requestMatchers(AntPathRequestMatcher)
-//                                .requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.OPTIONS, "/api/v1/auth")).permitAll()
-                                .requestMatchers(AntPathRequestMatcher.antMatcher("/api/v1/auth")).permitAll()
+                                .requestMatchers(AntPathRequestMatcher.antMatcher("/api/v1/auth/register")).permitAll()
+//                                .requestMatchers("/console").permitAll()
                                 .anyRequest().authenticated()//permitALL
                 )
                 .httpBasic(Customizer.withDefaults())
@@ -39,20 +36,4 @@ public class SecurityConfig {
                 .build();
     }
 
- /*   @Bean
-    public InMemoryUserDetailsManager getUserDetailsManager() {
-        //tworze obiekt uzytkownika
-        UserDetails user1 = User.withUsername("admin")
-                .password(passwordEncoder.encode("aaa")) // koduje haslo
-                .roles("moderator")
-                .build();
-
-        UserDetails user2 = User.withUsername("adam")
-                .password(passwordEncoder.encode("bbb")) // koduje haslo
-                .roles("user")
-                .build();
-
-        //tworzę obiekt zarzadzajacy uzytkownikami
-        return new InMemoryUserDetailsManager(user1, user2);
-    }*/
 }

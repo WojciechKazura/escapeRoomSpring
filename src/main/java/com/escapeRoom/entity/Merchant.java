@@ -20,8 +20,8 @@ public class Merchant extends Item {
     public Merchant() {
     }
 
-   public Merchant(List<Item> itemList) {
-        super("Merchant",ItemType.MERCHANT);
+    public Merchant(List<Item> itemList) {
+        super("Merchant", ItemType.MERCHANT);
         this.itemList = itemList;
     }
 
@@ -36,26 +36,6 @@ public class Merchant extends Item {
             return "Nie masz wystarczajacel ilości monet.";
         }
     }
-
-    /*
-    * akcja uzycia + decyzja
-    * akcja uzycia bez decyzji
-    *   room = scena
-    *   nie tylko drzwi przemieszczaja
-    *
-    * pokoj z:
-    * merchant -> przenosi do sklepu
-    * door
-    * window
-    *
-    * sklep merchanta:
-    * kup klucz za 2
-    *
-    *
-    * */
-
-
-
 
 
 }

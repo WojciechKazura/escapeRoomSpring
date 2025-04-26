@@ -5,7 +5,7 @@ import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
+
 
 @Entity
 public class FurnitureForBooks extends Item {

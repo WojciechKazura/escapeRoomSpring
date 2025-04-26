@@ -22,6 +22,10 @@ public class Account {
         this.game = game;
     }
 
+    public Game getGame() {
+        return game;
+    }
+
     public int getId() {//wrapper
         return id;
     }

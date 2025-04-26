@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("api/v1/actions")
-//@CrossOrigin()
 public class ActionController {
 
     private GameService gameService;

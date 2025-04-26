@@ -9,7 +9,6 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -29,11 +28,20 @@ public class AccountService implements UserDetailsService {
     }
 
     public AccountDto createAccount(AccountDto accountDto) {
+        if (accountRepository.existsByLogin(accountDto.getLogin())) {
+            throw new IllegalArgumentException("Login in use");
+        }
         Game game = gameService.createGame();
         Account account = new Account(accountDto.getLogin(),encoder.encode(accountDto.getPassword()), game);
         accountRepository.save(account);
         AccountDto finalAccountDto = new AccountDto(account.getId(), account.getLogin(), account.getPassword(), game.getId());
         gameService.addScenarios(game);
+        return finalAccountDto;
+    }
+
+    public AccountDto loginAccount(String userName) {
+        Account account = accountRepository.findByLogin(userName).orElseThrow();
+        AccountDto finalAccountDto = new AccountDto(account.getId(), account.getLogin(), account.getPassword(), account.getGame().getId());
         return finalAccountDto;
     }
 
